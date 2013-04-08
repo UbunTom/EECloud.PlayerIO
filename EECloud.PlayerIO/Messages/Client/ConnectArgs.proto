@@ -1,0 +1,11 @@
+package EECloud.PlayerIO.Messages;
+
+message ConnectArgs {
+	public string GameId = 1;
+	
+	public string ConnectionId = 2;
+	
+	public string UserId = 3;
+	
+	public string Auth = 4;
+}
