@@ -29,7 +29,8 @@ namespace EECloud.PlayerIO
 		private map<string, string> RoomData; //{ get; private set; }
 		public: map<string, string> getRoomData(){return RoomData;}
 		
-		void RoomInfo(string id, string roomType, int onlineUsers, map<string, string> roomData)
+		
+		public: void RoomInfo(string id, string roomType, int onlineUsers, map<string, string> roomData)
 		{
 		    Id = id;
 		    RoomType = roomType;
