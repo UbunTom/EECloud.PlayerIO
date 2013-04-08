@@ -3,13 +3,13 @@ using EECloud.PlayerIO.Messages;
 
 namespace EECloud.PlayerIO
 {
-    public class BigDB
+    class BigDB
     {
-        private const string PlayerObjectsTableName = "PlayerObjects";
+        private: const string PlayerObjectsTableName = "PlayerObjects";
 
-        private readonly HttpChannel _channel;
+        private: HttpChannel _channel; //Readonly
 
-        internal BigDB(HttpChannel channel)
+        BigDB(HttpChannel channel)//Constructor
         {
             _channel = channel;
         }
