@@ -5,27 +5,32 @@ using System.Net;
 using System.Text;
 using EECloud.PlayerIO.Messages;
 using ProtoBuf;
+#include <curl/curl.h>
+#include <string>
+#include <map>
 
 namespace EECloud.PlayerIO
 {
-    internal class HttpChannel
-    {
-        private const string EndpointUri = "http://api.playerio.com/api";
-        private Dictionary<string, string> _headers;
-
-        public TResponse Request<TRequest, TResponse, TError>(int method, TRequest args) where TError : Exception
+	class HttpChannel
+	{
+		private: const string EndpointUri = "http://api.playerio.com/api";
+		private: map<string, string> _headers;
+		
+		public:
+		template<TRequest, TResponse, TError>
+		TResponse Request(int method, TRequest args)// where TError : Exception
         {
-            var r = default(TResponse);
-            var request = GetRequest(method);
-
-			using (var requestStream = request.GetRequestStream())
+			TResponse r = TResponse();//default(TResponse);
+			WebRequest request = GetRequest(method);
+			
 			{
+				var requestStream = request.GetRequestStream()
 				Serializer.Serialize(requestStream, args);
 			}
-
+			
 			try
 			{
-                using (var responseStream = request.GetResponse().GetResponseStream())
+				using (var responseStream = request.GetResponse().GetResponseStream())
 				{
 					if (ReadHeader(responseStream))
 					{
