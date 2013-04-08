@@ -29,4 +29,4 @@ namespace EECloud.PlayerIO
             RoomData = (roomData ?? new Dictionary<string, string>());
         }
     }
-}
+} 
