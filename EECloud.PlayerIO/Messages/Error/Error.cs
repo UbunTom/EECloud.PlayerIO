@@ -2,16 +2,16 @@
 
 namespace EECloud.PlayerIO.Messages
 {
-    [ProtoContract]
+    //[ProtoContract]
     public class Error
     {
-        [ProtoMember(1)]
-        public ErrorCode ErrorCode { get; set; }
+        //[ProtoMember(1)]
+        public: ErrorCode ErrorCode;// { get; set; }
 
-        [ProtoMember(2)]
-        public string Message { get; set; }
+        //[ProtoMember(2)]
+        public: string Message;// { get; set; }
 
-        public Error()
+        public: void Error()
         {
             ErrorCode = ErrorCode.InternalError;
         }
