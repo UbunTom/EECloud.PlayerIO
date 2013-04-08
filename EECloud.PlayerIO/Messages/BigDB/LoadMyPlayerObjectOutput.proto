@@ -1,0 +1,5 @@
+package EECloud.PlayerIO.Messages;
+
+message LoadMyPlayerObjectOutput {
+  optional DatabaseObject PlayerObject = 1;
+}
