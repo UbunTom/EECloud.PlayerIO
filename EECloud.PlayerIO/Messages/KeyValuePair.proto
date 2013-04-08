@@ -1,6 +1,6 @@
-package EECloud.PlayerIO.Messages
+package EECloud.PlayerIO.Messages;
 
 message KeyValuePair {
-	optional string Key;
-	optional string Value;
+	optional string Key = 1;
+	optional string Value = 2;
 }
