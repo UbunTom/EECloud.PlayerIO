@@ -3,6 +3,8 @@ using System.Security.Cryptography;
 using System.Text;
 using EECloud.PlayerIO.Messages;
 #include <time.h>
+#include <sstream>
+#include <string>
 #include "Cryptography/HMAC_SHA1.h"
 
 namespace EECloud.PlayerIO
@@ -12,10 +14,11 @@ namespace EECloud.PlayerIO
 	/// </summary>
 	public static class PlayerIO
 	{
-		private static readonly HttpChannel Channel = new HttpChannel();
+		private: static HttpChannel Channel = new HttpChannel(); //readonly
 		
-		private static readonly Lazy<QuickConnect> _quickConnect = new Lazy<QuickConnect>(() => new QuickConnect(Channel));
-		public static QuickConnect QuickConnect
+		private: static Lazy<QuickConnect> _quickConnect = new Lazy<QuickConnect>(() => new QuickConnect(Channel)); //readonly
+		
+		public: static QuickConnect QuickConnect
 		{
 		    get { return _quickConnect.Value; }
 		}
@@ -28,7 +31,7 @@ namespace EECloud.PlayerIO
 		/// <param name="userId">The ID of the user you wish to authenticate.</param>
 		/// <param name="auth">If the connection identified by ConnectionIdentifier only accepts authenticated requests: The auth value generated based on 'userId'.
 		/// You can generate an auth value using the CalcAuth() method.</param>
-		public static Client Connect(string gameId, string connectionId, string userId, string auth)
+		public: static Client Connect(string gameId, string connectionId, string userId, string auth)
 		{
 			var connectArg = new ConnectArgs
 			{
@@ -46,28 +49,39 @@ namespace EECloud.PlayerIO
 		/// </summary>
 		/// <param name="userId">The UserID to use when generating the hash</param>
 		/// <param name="sharedSecret">The shared secret to use when generating the hash. This must be the same value as the one given to a connection in the admin panel.</param>
-		public static string CalcAuth(string userId, string sharedSecret)
+		public: static string CalcAuth(string userId, string sharedSecret)
 		{
 			BYTE digest[20]; //HMAC output
 			
 			int unixtimeint = (int)time(NULL);
-            
-            stringstream timeStream; //convert unixtimeint to a string
+			
+			stringstream timeStream; //convert unixtimeint to a string
 			timeStream << unixtimeint;
 			string unixtime = timeStream.str();
             
-            string text = unixTime + ":" + userId;
-            
+			string text = unixTime + ":" + userId;
+			
 			CHMAC_SHA1 HMAC_SHA1;
 			HMAC_SHA1.HMAC_SHA1((BYTE*)text.str(), text.size(), (BYTE*)sharedSecret.str(), sharedSecret.size(), digest) ;
+			
+			stringstream outhex;
+			outhex << hex;
+			for (int i=0;i<20;i++)
+			{
+				outhex << (int)digest[i];
+			}
+			string output = outhex.str();
+			
+			return output;
            
-           /*using (var hmacInstance = new HMACSHA1(Encoding.UTF8.GetBytes(sharedSecret)))
-            {
-                var hmacHash = hmacInstance.ComputeHash(Encoding.UTF8.GetBytes(unixTime + ":" + userId));
-
-                var strBld = new StringBuilder(unixTime + ":" + BitConverter.ToString(hmacHash));
-                return strBld.Replace("-", "").ToString().ToLower(Config.InvariantCulture);
-            }*/
+           
+			/*using (var hmacInstance = new HMACSHA1(Encoding.UTF8.GetBytes(sharedSecret)))
+			{
+				var hmacHash = hmacInstance.ComputeHash(Encoding.UTF8.GetBytes(unixTime + ":" + userId));
+				
+				var strBld = new StringBuilder(unixTime + ":" + BitConverter.ToString(hmacHash));
+				return strBld.Replace("-", "").ToString().ToLower(Config.InvariantCulture);
+			}*/
 		}
 	}
 }
