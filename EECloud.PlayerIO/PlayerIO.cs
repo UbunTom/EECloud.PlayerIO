@@ -1,9 +1,7 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Text;
 using EECloud.PlayerIO.Messages;
 #include <time.h>
 #include <sstream>
+#include <vector>
 #include <string>
 #include "Cryptography/HMAC_SHA1.h"
 
@@ -14,13 +12,16 @@ namespace EECloud.PlayerIO
 	/// </summary>
 	public static class PlayerIO
 	{
-		private: static HttpChannel Channel = new HttpChannel(); //readonly
+		private: static HttpChannel* Channel = new HttpChannel(); //readonly
 		
-		private: static Lazy<QuickConnect> _quickConnect = new Lazy<QuickConnect>(() => new QuickConnect(Channel)); //readonly
+		//private: static Lazy<QuickConnect> _quickConnect = new Lazy<QuickConnect>(() => new QuickConnect(Channel)); //readonly
+		private: static vector<QuickConnect*> _quickConnect;
 		
-		public: static QuickConnect QuickConnect
+		
+		public: static QuickConnect* QuickConnect()
 		{
-		    get { return _quickConnect.Value; }
+			if (_quickConnect.size==0)_quickconnect.push_back(new QuickConnect(Channel))	
+			     return _quickConnect[0];
 		}
 		
 		/// <summary>
@@ -31,16 +32,15 @@ namespace EECloud.PlayerIO
 		/// <param name="userId">The ID of the user you wish to authenticate.</param>
 		/// <param name="auth">If the connection identified by ConnectionIdentifier only accepts authenticated requests: The auth value generated based on 'userId'.
 		/// You can generate an auth value using the CalcAuth() method.</param>
-		public: static Client Connect(string gameId, string connectionId, string userId, string auth)
+		public: static Client* Connect(string gameId, string connectionId, string userId, string auth)
 		{
-			var connectArg = new ConnectArgs
-			{
-				GameId = gameId,
-				ConnectionId = connectionId,
-				UserId = userId,
-				Auth = auth
-			};
-			var connectOutput = Channel.Request<ConnectArgs, ConnectOutput, PlayerIOError>(10, connectArg);
+			ConnectArgs* connectArg = new ConnectArgs;
+			connectArg.GameId=gameId;
+			connectArg.ConnectionId=connectionId;
+			connectArg.userId=userId;
+			connectArg.Auth=auth;
+			
+			ConnectOutput connectOutput = Channel.Request<ConnectArgs, ConnectOutput, PlayerIOError>(10, connectArg);
 			return new Client(Channel, connectOutput.Token, connectOutput.UserId);
 		}
 		
