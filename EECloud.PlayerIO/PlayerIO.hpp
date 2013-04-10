@@ -21,7 +21,7 @@ namespace EECloud.PlayerIO
 		public: static QuickConnect* QuickConnect()
 		{
 			if (_quickConnect.size==0)_quickconnect.push_back(new QuickConnect(Channel))	
-			     return _quickConnect[0];
+			return _quickConnect[0];
 		}
 		
 		/// <summary>
