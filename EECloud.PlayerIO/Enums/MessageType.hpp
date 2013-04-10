@@ -15,28 +15,28 @@ namespace EECloud.PlayerIO
 		Boolean = 8
     }
     
-    class Object
+    class MessageObject
     {
     	int _MessageType
     };
     
-    class _Integer: public Object
+    class _Integer: public MessageObject
     {int data;};
-     class _UInteger: public Object
+     class _UInteger: public MessageObject
     {undigen int data;};
-     class _Long: public Object
+     class _Long: public MessageObject
     {long data;};
-     class _ULong: public Object
+     class _ULong: public MessageObject
     {unsigned long data;};
-     class _Double: public Object
+     class _Double: public MessageObject
     {double data;};
-     class _Float: public Object
+     class _Float: public MessageObject
     {float data;};
-     class _String: public Object
+     class _String: public MessageObject
     {string data;};
-     class _ByteArray: public Object
+     class _ByteArray: public MessageObject
     {unsigned int size; unsigned char* data;};
-     class _Boolean: public Object
+     class _Boolean: public MessageObject
     {bool data;};
 
 }
