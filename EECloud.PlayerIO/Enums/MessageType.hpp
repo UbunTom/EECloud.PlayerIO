@@ -17,7 +17,7 @@ namespace EECloud.PlayerIO
     
 	class MessageObject
 	{
-		int _MessageType
+		int _MessageType;
 	};
     
 	class _Integer: public MessageObject
