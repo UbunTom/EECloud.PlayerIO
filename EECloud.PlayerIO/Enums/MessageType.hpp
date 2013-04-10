@@ -12,4 +12,10 @@ namespace EECloud.PlayerIO
 		ByteArray = 7,
 		Boolean = 8
     }
+    
+    struct TypeTuple
+    {
+        int type;
+        void* data;
+    }
 }
