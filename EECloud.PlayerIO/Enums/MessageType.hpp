@@ -1,3 +1,5 @@
+#include <string>
+
 namespace EECloud.PlayerIO
 {
     enum MessageType
@@ -13,9 +15,28 @@ namespace EECloud.PlayerIO
 		Boolean = 8
     }
     
-    struct TypeTuple
+    class Object
     {
-        int type;
-        void* data;
-    }
+    	int _MessageType
+    };
+    
+    class _Integer: public Object
+    {int data;};
+     class _UInteger: public Object
+    {undigen int data;};
+     class _Long: public Object
+    {long data;};
+     class _ULong: public Object
+    {unsigned long data;};
+     class _Double: public Object
+    {double data;};
+     class _Float: public Object
+    {float data;};
+     class _String: public Object
+    {string data;};
+     class _ByteArray: public Object
+    {unsigned int size; unsigned char* data;};
+     class _Boolean: public Object
+    {bool data;};
+
 }
