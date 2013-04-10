@@ -1,7 +1,7 @@
 package EECloud.PlayerIO.Helpers;
 
 message DatabaseObject {
-  optional string Key = 1;
+	optional string Key = 1;
 	optional string Version = 2;
 	repeated KeyValuePairSD Properties = 3;
 
