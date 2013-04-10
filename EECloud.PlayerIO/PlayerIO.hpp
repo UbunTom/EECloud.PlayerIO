@@ -1,6 +1,7 @@
 using EECloud.PlayerIO.Messages;
 #include <vector>
 #include <string>
+#include "Helpers/HttpChannel.hpp"
 
 
 namespace EECloud.PlayerIO
