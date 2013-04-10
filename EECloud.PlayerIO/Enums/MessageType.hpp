@@ -1,6 +1,6 @@
-﻿namespace EECloud.PlayerIO
+namespace EECloud.PlayerIO
 {
-    internal enum MessageType : byte
+    enum MessageType
     {
         Integer = 0,
 		UInteger = 1,

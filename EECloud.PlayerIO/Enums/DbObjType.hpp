@@ -1,6 +1,6 @@
-﻿namespace EECloud.PlayerIO
+namespace EECloud.PlayerIO
 {
-    internal enum DbObjType
+    enum DbObjType
     {
 	    String,
     	Int,

@@ -3,7 +3,7 @@
     /// <summary>
     /// The code of the error that happened.
     /// </summary>
-    public enum ErrorCode : byte
+    enum ErrorCode
     {
         /// <summary>
         /// The method requested is not supported.

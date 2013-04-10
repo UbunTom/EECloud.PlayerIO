@@ -1,6 +1,6 @@
-﻿namespace EECloud.PlayerIO
+namespace EECloud.PlayerIO
 {
-    internal enum ProtocolType : byte
+    enum ProtocolType
     {
         Binary,
         Http = 71,

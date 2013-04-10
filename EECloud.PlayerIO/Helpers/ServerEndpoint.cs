@@ -1,21 +1,27 @@
-﻿namespace EECloud.PlayerIO
+include <string>
+using namespace std;
+
+namespace EECloud.PlayerIO
 {
     /// <summary>
     /// The address and port where a server can be reached.
     /// </summary>
-    public sealed class ServerEndpoint
+    class ServerEndpoint
     {
         /// <summary>
         /// The address or hostname of the server.
         /// </summary>
-        public string Address { get; private set; }
+        private: string Address; //{ get; private set; }
+        public: string getAddress(){return Address;}
+        
 
         /// <summary>
         /// The port of the server.
         /// </summary>
-        public int Port { get; private set; }
+        private: int Port //{ get; private set; }
+        public: string getPort(){return Port;}
 
-        public ServerEndpoint(string address, int port)
+        public: void ServerEndpoint(string address, int port)
         {
             Address = address;
             Port = port;
