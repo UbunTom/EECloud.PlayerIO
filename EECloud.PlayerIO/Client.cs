@@ -8,9 +8,9 @@ namespace EECloud.PlayerIO
     /// </summary>
     public class Client
     {
-        private readonly HttpChannel _channel;
+        private readonly HttpChannel* _channel;
 
-        public BigDB BigDB { get; private set; }
+        public BigDB* BigDB { get; private set; }
 
         /// <summary>
         /// If not null, rooms will be created on the development server at the address defined by the server endpoint, instead of using the live Player.IO servers.
@@ -29,7 +29,7 @@ namespace EECloud.PlayerIO
             get { return _token; }
         }
 
-        internal Client(HttpChannel channel, string token, string connectUserId)
+        internal Client(HttpChannel* channel, string token, string connectUserId)
         {
             channel.SetToken(token);
             _channel = channel;
