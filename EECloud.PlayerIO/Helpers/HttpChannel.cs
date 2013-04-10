@@ -11,25 +11,48 @@ using ProtoBuf;
 
 namespace EECloud.PlayerIO
 {
+	
+	struct CURLRequest
+	{
+		CURL handle;
+		struct curl_slist *headerlist;
+	}
+	
+	size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
+	{
+		std::string buf = std::string(static_cast<char *>(ptr), size * nmemb);
+		std::stringstream *response = static_cast<std::stringstream *>(stream);
+		response->write(buf.c_str(), (std::streamsize)buf.size());
+		return size * nmemb;
+	}
+	
 	class HttpChannel
 	{
 		private: const string EndpointUri = "http://api.playerio.com/api";
 		private: map<string, string> _headers;
 		
 		public:
-		template<TRequest, TResponse, TError>
+		template<class TRequest, class TResponse, class TError>
 		TResponse Request(int method, TRequest args)// where TError : Exception
         {
 			TResponse r = TResponse();//default(TResponse);
-			WebRequest request = GetRequest(method);
+			CURLRequest request = GetRequest(method);
 			
-			{
-				var requestStream = request.GetRequestStream()
-				Serializer.Serialize(requestStream, args);
-			}
+			stringstream protobufStream;//Prepare data to send
+			args->SerializeToOstream(&protobufStream);
+			string protobufStream = protobufStream.str();
+			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, protobufString);
+       			curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, protobufString.length());
+       			
+       			std::stringstream response;//Prepare to recieve data
+       			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+    			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
 			
 			try
 			{
+				res = curl_easy_perform(curl);
+				
+				
 				using (var responseStream = request.GetResponse().GetResponseStream())
 				{
 					if (ReadHeader(responseStream))
@@ -62,22 +85,40 @@ namespace EECloud.PlayerIO
 			return r;
 		}
 
-        private WebRequest GetRequest(int method)
+        private: CURLRequest GetRequest(int method)
         {
-            var value = WebRequest.Create(EndpointUri + "/" + method);
-            value.Timeout = 15000;
-            value.Method = "POST";
-            if (_headers != null)
-            {
-                lock (_headers)
-                {
-                    foreach (var header in _headers)
-                    {
-                        value.Headers[header.Key] = header.Value;
-                    }
-                }
-            }
-            return value;
+        	CURL *curl;
+		
+		stringstream methodStream; //convert mothos to a string
+		methodStream << method;
+		string methodString = methodStream.str();
+        	
+		curl_easy_setopt(curl, CURLOPT_URL, EndpointUri + "/" + methodString);
+		curl_easy_setopt(curl, CURLOPT_TIMEOUT, 15L);
+		curl_easy_setopt(curl, CURLOPT_POST, 1L);
+        	
+        	struct curl_slist *headerlist=NULL;
+        	
+        	
+        	
+        	if (_headers.size != 0)
+		{
+			/*lock (_headers) Is this using threads?
+			{*/
+			for (iter = _headers.begin(); iter != _headers.end(); ++iter)
+			{	
+				slist = curl_slist_append(slist, iter->first + ": " + iter->second);  
+			}
+			//}
+		}
+		
+		curl_easy_setopt(handle, CURLOPT_HTTPHEADER, slist);
+		
+		CURLRequest output;
+		output.handle=curl;
+		output.headerlist=slist;
+		
+		return output;
         }
 
         private bool ReadHeader(Stream responseStream)
