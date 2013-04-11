@@ -115,7 +115,7 @@ namespace EECloud.PlayerIO
         {
         	CURLRequest request;
 		
-		stringstream methodStream; //convert mothos to a string
+		stringstream methodStream; //convert method to a string
 		methodStream << method;
 		string methodString = methodStream.str();
         	
