@@ -131,26 +131,23 @@ namespace EECloud.PlayerIO
 			{*/
 			for (iter = _headers.begin(); iter != _headers.end(); ++iter)
 			{	
-				request.header_list = curl_slist_append(request.header_list, iter->first + ": " + iter->second);  
+				request.header_list = curl_slist_append(request.headerlist, iter->first + ": " + iter->second);  
 			}
 			//}
 		}
 		
-		curl_easy_setopt(request.handle(), CURLOPT_HTTPHEADER, slist);
+		curl_easy_setopt(request.handle(), CURLOPT_HTTPHEADER, request.headerlist);
+
 		
-		CURLRequest output;
-		output.handle=curl;
-		output.headerlist=slist;
-		
-		return output;
+		return request;
         }
 
         private bool ReadHeader(Stream responseStream)
         {
             if (responseStream.ReadByte() == 1)
             {
-                var num = (ushort)(responseStream.ReadByte() << 8 | responseStream.ReadByte());
-                var numArray = new byte[num];
+                ushort num = (ushort)(responseStream.ReadByte() << 8 | responseStream.ReadByte());
+                char* numArray = new char[num];
                 responseStream.Read(numArray, 0, numArray.Length);
                 lock (_headers)
                 {
