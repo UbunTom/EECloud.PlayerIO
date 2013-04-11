@@ -12,19 +12,35 @@ using ProtoBuf;
 namespace EECloud.PlayerIO
 {
 	
-	struct CURLRequest
+	class CURLRequest
 	{
-		CURL handle;
-		struct curl_slist *headerlist;
+		private: CURL* handle;
+		public:struct curl_slist *headerlist;
+		
+		CURLRequest()
+		{
+			handle = curl_easy_init();
+		}
+		
+		public: CURL* handle(){return handle;}
+		
+		public: size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
+		{
+			std::string buf = std::string(static_cast<char *>(ptr), size * nmemb);
+			std::stringstream *response = static_cast<std::stringstream *>(stream);
+			response->write(buf.c_str(), (std::streamsize)buf.size());
+			return size * nmemb;
+		}
+		
+		~CURLRequest()
+		{
+			curl_slist_free_al(headerslist);
+			curl_easy_cleanup(handle);
+		}
+
 	}
 	
-	size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
-	{
-		std::string buf = std::string(static_cast<char *>(ptr), size * nmemb);
-		std::stringstream *response = static_cast<std::stringstream *>(stream);
-		response->write(buf.c_str(), (std::streamsize)buf.size());
-		return size * nmemb;
-	}
+	
 	
 	class HttpChannel
 	{
@@ -87,19 +103,17 @@ namespace EECloud.PlayerIO
 
         private: CURLRequest GetRequest(int method)
         {
-        	CURL *curl;
+        	CURLRequest request;
 		
 		stringstream methodStream; //convert mothos to a string
 		methodStream << method;
 		string methodString = methodStream.str();
         	
-		curl_easy_setopt(curl, CURLOPT_URL, EndpointUri + "/" + methodString);
-		curl_easy_setopt(curl, CURLOPT_TIMEOUT, 15L);
-		curl_easy_setopt(curl, CURLOPT_POST, 1L);
+		curl_easy_setopt(request.handle(), CURLOPT_URL, EndpointUri + "/" + methodString);
+		curl_easy_setopt(request.handle(), CURLOPT_TIMEOUT, 15L);
+		curl_easy_setopt(request.handle(), CURLOPT_POST, 1L);
         	
-        	struct curl_slist *headerlist=NULL;
-        	
-        	
+        	request.headerlist=NULL;
         	
         	if (_headers.size != 0)
 		{
@@ -107,12 +121,12 @@ namespace EECloud.PlayerIO
 			{*/
 			for (iter = _headers.begin(); iter != _headers.end(); ++iter)
 			{	
-				slist = curl_slist_append(slist, iter->first + ": " + iter->second);  
+				request.header_list = curl_slist_append(request.header_list, iter->first + ": " + iter->second);  
 			}
 			//}
 		}
 		
-		curl_easy_setopt(handle, CURLOPT_HTTPHEADER, slist);
+		curl_easy_setopt(request.handle(), CURLOPT_HTTPHEADER, slist);
 		
 		CURLRequest output;
 		output.handle=curl;
