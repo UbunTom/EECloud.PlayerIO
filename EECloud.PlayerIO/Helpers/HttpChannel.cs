@@ -24,14 +24,6 @@ namespace EECloud.PlayerIO
 		
 		public: CURL* handle(){return handle;}
 		
-		public: size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
-		{
-			std::string buf = std::string(static_cast<char *>(ptr), size * nmemb);
-			std::stringstream *response = static_cast<std::stringstream *>(stream);
-			response->write(buf.c_str(), (std::streamsize)buf.size());
-			return size * nmemb;
-		}
-		
 		~CURLRequest()
 		{
 			curl_slist_free_al(headerslist);
@@ -40,6 +32,13 @@ namespace EECloud.PlayerIO
 
 	}
 	
+	size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
+	{
+		std::string buf = std::string(static_cast<char *>(ptr), size * nmemb);
+		std::stringstream *response = static_cast<std::stringstream *>(stream);
+		response->write(buf.c_str(), (std::streamsize)buf.size());
+		return size * nmemb;
+	}
 	
 	
 	class HttpChannel
@@ -56,20 +55,31 @@ namespace EECloud.PlayerIO
 			
 			stringstream protobufStream;//Prepare data to send
 			args->SerializeToOstream(&protobufStream);
-			string protobufStream = protobufStream.str();
-			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, protobufString);
-       			curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, protobufString.length());
+			string protobufString = protobufStream.str();
+			curl_easy_setopt(request.handle(), CURLOPT_POSTFIELDS, protobufString);
+       			curl_easy_setopt(request.handle(), CURLOPT_POSTFIELDSIZE, protobufString.length());
        			
        			std::stringstream response;//Prepare to recieve data
-       			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-    			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+       			std::stringstream headers;
+       			curl_easy_setopt(request.handle(), CURLOPT_WRITEFUNCTION, write_data);
+    			curl_easy_setopt(request.handle(), CURLOPT_WRITEDATA, &response);
+    			curl_easy_setopt(curl, CURLOPT_WRITEHEADER, &headers);
 			
 			try
 			{
-				res = curl_easy_perform(curl);
+				res = curl_easy_perform(curl);	
 				
+				if (res!=0)
+				{
+					stringstream errstream;
+					errstream << res;
+					throw PlayerIOError(ErrorCode.GeneralError, "A cURL error occured: " + errstream.str());
+				}
 				
-				using (var responseStream = request.GetResponse().GetResponseStream())
+				if (!r.ParseFromIstream(&response)) {
+					throw PlayerIOError(ErrorCode.GeneralError, "Failed to parse web response");
+				}
+				/*using (var responseStream = request.GetResponse().GetResponseStream())
 				{
 					if (ReadHeader(responseStream))
 					{
@@ -79,11 +89,11 @@ namespace EECloud.PlayerIO
 					{
 						throw GetError<TError>(responseStream);
 					}
-				}
+				}*/
 			}
-			catch (WebException webException)
+			catch (PlayerIOError err)
 			{
-				if (webException.Response == null)
+			/*	if (webException.Response == null)
 				{
 					throw new PlayerIOError(ErrorCode.GeneralError, "Connection to the Player.IO WebService has just been unexpectedly terminated.");
 				}
@@ -95,7 +105,7 @@ namespace EECloud.PlayerIO
 			            {
 			                throw new PlayerIOError(ErrorCode.GeneralError, "Error communicating with the Player.IO WebService: " + streamReader.ReadToEnd());
 			            }
-			    }
+			    }*/
 			}
 
 			return r;
