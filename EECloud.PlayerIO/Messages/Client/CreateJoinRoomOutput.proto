@@ -1,0 +1,12 @@
+import "ServerEndpoint.proto";
+
+package EECloud;
+
+message CreateJoinRoomOutput
+{
+	optional string RoomId = 1;
+
+	optional string JoinKey = 2;
+
+	repeated ServerEndpoint Endpoints = 3;
+}

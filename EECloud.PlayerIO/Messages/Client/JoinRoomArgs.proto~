@@ -1,0 +1,12 @@
+import "KeyValuePair.proto"
+
+package EECloud;
+
+message JoinRoomArgs
+{
+	optional string RoomId = 1;
+
+        repeated KeyValuePair[] JoinData = 2;
+
+	optional bool IsDevRoom = 3;
+}

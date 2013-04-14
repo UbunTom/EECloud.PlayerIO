@@ -1,0 +1,8 @@
+package EECloud;
+
+message ServerEndpoint
+{
+	optional string Address = 1;
+	
+	optional int32 Port = 2;
+}

@@ -1,0 +1,12 @@
+package EECloud;
+
+message ConnectOutput
+{
+	optional string Token = 1;
+	
+        optional string UserId = 2;
+
+        optional bool ShowBranding = 3;
+
+        optional string GameFSRedirectMap = 4;
+}
