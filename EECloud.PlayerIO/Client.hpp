@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
-using EECloud.PlayerIO.Messages;
+#ifndef CLIENT_H
+#define CLIENT_H
+
+#include <string>
+#include <map>
+using namespace std;
 
 namespace EECloud
 {
@@ -39,14 +43,14 @@ namespace EECloud
         /// <param name="visible">If the room doesn't exists: Determines (upon creation) if the room should be visible when listing rooms with GetRooms.</param>
         /// <param name="roomData">If the room doesn't exists: The data to initialize the room with (upon creation).</param>
         /// <param name="joinData">Data to send to the room with additional information about the join.</param>
-        public: Connection* CreateJoinRoom(string roomId, string serverType, bool visible = true, Dictionary<string, string> roomData = null, Dictionary<string, string> joinData = null);
+        public: Connection* CreateJoinRoom(string roomId, string serverType, bool visible = true, map<string, string> roomData = null, map<string, string> joinData = null);
 
         /// <summary>
         /// Joins a running multiplayer room.
         /// </summary>
         /// <param name="roomId">The ID of the room you wish to join.</param>
         /// <param name="joinData">Data to send to the room with additional information about the join.</param>
-        public: Connection* JoinRoom(string roomId, Dictionary<string, string> joinData = null);
+        public: Connection* JoinRoom(string roomId, map<string, string> joinData = null);
 
         /// <summary>
         /// Lists the currently running multiplayer rooms.
@@ -56,7 +60,9 @@ namespace EECloud
         /// <param name="resultLimit">The maximum amount of rooms you want to receive. Use 0 for 'as many as possible'.</param>
         /// <param name="resultOffset">Defines the index to show results from.</param>
         /// <param name="onlyDevRooms">Set to 'true' to list rooms from the development room list, rather than from the game's global room list.</param>
-        public RoomInfo[] ListRooms(string roomType, Dictionary<string, string> searchCriteria = null, int resultLimit = 0, int resultOffset = 0, bool onlyDevRooms = false);
+        public: Vector<RoomInfo> ListRooms(string roomType, map<string, string> searchCriteria = null, int resultLimit = 0, int resultOffset = 0, bool onlyDevRooms = false);
 
     }
 }
+
+#endif
