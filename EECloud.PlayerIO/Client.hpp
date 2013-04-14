@@ -56,18 +56,7 @@ namespace EECloud
         /// <param name="resultLimit">The maximum amount of rooms you want to receive. Use 0 for 'as many as possible'.</param>
         /// <param name="resultOffset">Defines the index to show results from.</param>
         /// <param name="onlyDevRooms">Set to 'true' to list rooms from the development room list, rather than from the game's global room list.</param>
-        public RoomInfo[] ListRooms(string roomType, Dictionary<string, string> searchCriteria = null, int resultLimit = 0, int resultOffset = 0, bool onlyDevRooms = false)
-        {
-            var listRoomsArg = new ListRoomsArgs
-            {
-                RoomType = roomType,
-                SearchCriteria = Converter.Convert(searchCriteria),
-                ResultLimit = resultLimit,
-                ResultOffset = resultOffset,
-                OnlyDevRooms = onlyDevRooms
-            };
-            var listRoomsOutput = _channel.Request<ListRoomsArgs, ListRoomsOutput, PlayerIOError>(30, listRoomsArg);
-            return listRoomsOutput.RoomInfo ?? new RoomInfo[0];
-        }
+        public RoomInfo[] ListRooms(string roomType, Dictionary<string, string> searchCriteria = null, int resultLimit = 0, int resultOffset = 0, bool onlyDevRooms = false);
+
     }
 }
