@@ -5,9 +5,8 @@ using System.Net;
 using System.Text;
 using EECloud.PlayerIO.Messages;
 using ProtoBuf;
-#include <curl/curl.h>
-#include <string>
-#include <map>
+
+#include "HttpChannel.hpp"
 
 namespace EECloud.PlayerIO
 {
