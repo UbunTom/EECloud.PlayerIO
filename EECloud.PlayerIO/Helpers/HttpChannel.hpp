@@ -22,7 +22,7 @@ namespace EECloud
 		public:
 		template<class TRequest, class TResponse, class TError>
 		TResponse Request(int method, TRequest args)// where TError : Exception
-        {
+        	{
 			TResponse r = TResponse();//default(TResponse);
 			CURLRequest request = GetRequest(method);
 
@@ -83,3 +83,29 @@ namespace EECloud
 
 			return r;
 		}
+		
+		private: CURLRequest GetRequest(int method);
+		
+		private: bool ReadHeader(Stream responseStream);
+		
+		public: static TError GetError<TError>(Stream errorStream)// where TError : Exception
+		{
+			if (typeof(TError) != typeof(PlayerIOError))
+			{
+				if (typeof(TError) != typeof(PlayerIORegistrationError))
+				{
+				    return new ApplicationException("Unexpected error type: " + typeof(TError).FullName) as TError;
+				}
+				var regError = Serializer.Deserialize<RegistrationError>(errorStream);
+				return new PlayerIORegistrationError(regError.ErrorCode, regError.Message, regError.UsernameError, regError.PasswordError, regError.EmailError, regError.CaptchaError) as TError;
+			}
+			var err = Serializer.Deserialize<Error>(errorStream);
+			return new PlayerIOError(err.ErrorCode, err.Message) as TError;
+		}
+		
+		public: void SetToken(string token);
+		
+	}
+}
+		
+		
