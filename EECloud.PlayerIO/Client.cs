@@ -1,42 +1,35 @@
 ﻿using System.Collections.Generic;
 using EECloud.PlayerIO.Messages;
 
-namespace EECloud.PlayerIO
+namespace EECloud
 {
     /// <summary>
     /// Represents a client you can access the various Player.IO services with.
     /// </summary>
     public class Client
     {
-        private readonly HttpChannel* _channel;
+        private: HttpChannel* _channel;
 
-        public BigDB* BigDB { get; private set; }
+        public: BigDB* BigDB;
 
         /// <summary>
         /// If not null, rooms will be created on the development server at the address defined by the server endpoint, instead of using the live Player.IO servers.
         /// </summary>
-        public ServerEndpoint DevelopmentServer;
+        public: ServerEndpoint* DevelopmentServer;
 
-        private readonly string _connectUserId;
-        public string ConnectUserId
+        private: string _connectUserId;
+        public: string ConnectUserId()
         {
-            get { return _connectUserId; }
+            return _connectUserId;
         }
 
-        private readonly string _token;
-        public string Token
+        private: string _token;
+        public: string Token()
         {
-            get { return _token; }
+            return _token;
         }
 
-        internal Client(HttpChannel* channel, string token, string connectUserId)
-        {
-            channel.SetToken(token);
-            _channel = channel;
-            _token = token;
-            _connectUserId = connectUserId;
-            BigDB = new BigDB(channel);
-        }
+        public: Client(HttpChannel* channel, string token, string connectUserId);
 
         /// <summary>
         /// Creates a multiplayer room (if it doesn't exists already), and joins it.
@@ -46,39 +39,14 @@ namespace EECloud.PlayerIO
         /// <param name="visible">If the room doesn't exists: Determines (upon creation) if the room should be visible when listing rooms with GetRooms.</param>
         /// <param name="roomData">If the room doesn't exists: The data to initialize the room with (upon creation).</param>
         /// <param name="joinData">Data to send to the room with additional information about the join.</param>
-        public Connection CreateJoinRoom(string roomId, string serverType, bool visible = true, Dictionary<string, string> roomData = null, Dictionary<string, string> joinData = null)
-        {
-            var createJoinRoomArg = new CreateJoinRoomArgs
-                                        {
-                                            RoomId = roomId,
-                                            ServerType = serverType,
-                                            Visible = visible,
-                                            RoomData = Converter.Convert(roomData),
-                                            JoinData = Converter.Convert(joinData),
-                                            IsDevRoom = DevelopmentServer != null
-                                        };
-            var createJoinRoomOutput = _channel.Request<CreateJoinRoomArgs, CreateJoinRoomOutput, PlayerIOError>(27, createJoinRoomArg);
-            var serverEndpoint = DevelopmentServer ?? Converter.Convert(createJoinRoomOutput.Endpoints[0]);
-            return new Connection(serverEndpoint, createJoinRoomOutput.JoinKey);
-        }
+        public: Connection* CreateJoinRoom(string roomId, string serverType, bool visible = true, Dictionary<string, string> roomData = null, Dictionary<string, string> joinData = null);
 
         /// <summary>
         /// Joins a running multiplayer room.
         /// </summary>
         /// <param name="roomId">The ID of the room you wish to join.</param>
         /// <param name="joinData">Data to send to the room with additional information about the join.</param>
-        public Connection JoinRoom(string roomId, Dictionary<string, string> joinData = null)
-        {
-            var joinRoomArg = new JoinRoomArgs
-            {
-                RoomId = roomId,
-                JoinData = Converter.Convert(joinData),
-                IsDevRoom = DevelopmentServer != null
-            };
-            var joinRoomOutput = _channel.Request<JoinRoomArgs, JoinRoomOutput, PlayerIOError>(24, joinRoomArg);
-            var serverEndpoint = DevelopmentServer ?? Converter.Convert(joinRoomOutput.Endpoints[0]);
-            return new Connection(serverEndpoint, joinRoomOutput.JoinKey);
-        }
+        public: Connection* JoinRoom(string roomId, Dictionary<string, string> joinData = null);
 
         /// <summary>
         /// Lists the currently running multiplayer rooms.
