@@ -1,24 +1,16 @@
 ﻿using EECloud.PlayerIO.Helpers;
 using EECloud.PlayerIO.Messages;
 
-namespace EECloud.PlayerIO
+namespace EECloud
 {
     class BigDB
     {
-        private: const string PlayerObjectsTableName = "PlayerObjects";
+        private: const string PlayerObjectsTableName;
 
-        private: HttpChannel _channel; //Readonly
+        private: HttpChannel* _channel; //Readonly
 
-        BigDB(HttpChannel channel)//Constructor
-        {
-            _channel = channel;
-        }
+        BigDB(HttpChannel* channel);//Constructor
 
-        public DatabaseObject LoadMyPlayerObject()
-        {
-            LoadMyPlayerObjectOutput loadMyPlayerObjectOutput = _channel.Request<NoArgsOrOutput*, LoadMyPlayerObjectOutput*, PlayerIOError>(103, new NoArgsOrOutput());
-            loadMyPlayerObjectOutput.PlayerObject.Table = PlayerObjectsTableName;
-            return loadMyPlayerObjectOutput.PlayerObject;
-        }
+        public: DatabaseObject* LoadMyPlayerObject();
     }
 }
