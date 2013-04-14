@@ -1,3 +1,8 @@
+#include <curl/curl.h>
+#include <string>
+#include <map>
+using namespace std;
+
 namespace EECloud
 {
 	class CURLRequest
@@ -16,8 +21,9 @@ namespace EECloud
 
 	class HttpChannel
 	{
-		private: const string EndpointUri = "http://api.playerio.com/api";
+		private: const string EndpointUri;
 		private: map<string, string> _headers;
+		public: HttpChannel();
 
 		public:
 		template<class TRequest, class TResponse, class TError>
