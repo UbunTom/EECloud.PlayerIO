@@ -18,7 +18,7 @@
 
 namespace EECloud
 {
-  template <class Socket>
+	template <class Socket>
 	void vector_RoomData(Socket socket,Vector<KeyValuePair>* plug)
 	{
 		socket.clear_RoomData();
@@ -27,7 +27,7 @@ namespace EECloud
 			socket.add_RoomData(plug[0]);
 		}
 	}
-
+	
 	template <class Socket>
 	void vector_JoinData(Socket socket,Vector<KeyValuePair>* plug)
 	{
@@ -37,7 +37,7 @@ namespace EECloud
 			socket.add_JoinData(plug[0]);
 		}
 	}
-
+	
 	template <class Socket>
 	void vector_ExtraData(Socket socket,Vector<KeyValuePair>* plug)
 	{
@@ -47,7 +47,7 @@ namespace EECloud
 			socket.add_ExtraData(plug[0]);
 		}
 	}
-
+	
 	template <class Socket>
 	void vector_SearchCriteria(Socket socket,Vector<KeyValuePair>* plug)
 	{
