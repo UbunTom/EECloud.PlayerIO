@@ -13,6 +13,9 @@
 #include "JoinRoomOutput.pb.h";
 #include "ListRoomsArgs.pb.h";
 #include "ListRoomsOutput.pb.h";
+#include "KeyValuePair.pb.h";
+#include "NoArgsOrOutput.pb.h";
+#include "ServerEndpoint.pb.h";
 
 
 
