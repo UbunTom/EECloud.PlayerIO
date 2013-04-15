@@ -1,4 +1,4 @@
-import "DatabaseObject.proto";
+import "DbObjValue.proto";
 
 package EECloud.PlayerIO.Messages;
 

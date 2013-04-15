@@ -23,6 +23,7 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/generated_message_reflection.h>
+#include "DbObjValue.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace EECloud {
@@ -33,6 +34,7 @@ void protobuf_AssignDesc_KeyValuePair_2eproto();
 void protobuf_ShutdownFile_KeyValuePair_2eproto();
 
 class KeyValuePair;
+class KeyValuePairSD;
 
 // ===================================================================
 
@@ -133,6 +135,103 @@ class KeyValuePair : public ::google::protobuf::Message {
   
   void InitAsDefaultInstance();
   static KeyValuePair* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class KeyValuePairSD : public ::google::protobuf::Message {
+ public:
+  KeyValuePairSD();
+  virtual ~KeyValuePairSD();
+  
+  KeyValuePairSD(const KeyValuePairSD& from);
+  
+  inline KeyValuePairSD& operator=(const KeyValuePairSD& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+  
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+  
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const KeyValuePairSD& default_instance();
+  
+  void Swap(KeyValuePairSD* other);
+  
+  // implements Message ----------------------------------------------
+  
+  KeyValuePairSD* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const KeyValuePairSD& from);
+  void MergeFrom(const KeyValuePairSD& from);
+  void Clear();
+  bool IsInitialized() const;
+  
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  
+  ::google::protobuf::Metadata GetMetadata() const;
+  
+  // nested types ----------------------------------------------------
+  
+  // accessors -------------------------------------------------------
+  
+  // optional string Key = 1;
+  inline bool has_key() const;
+  inline void clear_key();
+  static const int kKeyFieldNumber = 1;
+  inline const ::std::string& key() const;
+  inline void set_key(const ::std::string& value);
+  inline void set_key(const char* value);
+  inline void set_key(const char* value, size_t size);
+  inline ::std::string* mutable_key();
+  inline ::std::string* release_key();
+  
+  // optional .EECloud.DbObjValue Value = 2;
+  inline bool has_value() const;
+  inline void clear_value();
+  static const int kValueFieldNumber = 2;
+  inline const ::EECloud::DbObjValue& value() const;
+  inline ::EECloud::DbObjValue* mutable_value();
+  inline ::EECloud::DbObjValue* release_value();
+  
+  // @@protoc_insertion_point(class_scope:EECloud.KeyValuePairSD)
+ private:
+  inline void set_has_key();
+  inline void clear_has_key();
+  inline void set_has_value();
+  inline void clear_has_value();
+  
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  
+  ::std::string* key_;
+  ::EECloud::DbObjValue* value_;
+  
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  
+  friend void  protobuf_AddDesc_KeyValuePair_2eproto();
+  friend void protobuf_AssignDesc_KeyValuePair_2eproto();
+  friend void protobuf_ShutdownFile_KeyValuePair_2eproto();
+  
+  void InitAsDefaultInstance();
+  static KeyValuePairSD* default_instance_;
 };
 // ===================================================================
 
@@ -255,6 +354,97 @@ inline ::std::string* KeyValuePair::release_value() {
     value_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
+}
+
+// -------------------------------------------------------------------
+
+// KeyValuePairSD
+
+// optional string Key = 1;
+inline bool KeyValuePairSD::has_key() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void KeyValuePairSD::set_has_key() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void KeyValuePairSD::clear_has_key() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void KeyValuePairSD::clear_key() {
+  if (key_ != &::google::protobuf::internal::kEmptyString) {
+    key_->clear();
+  }
+  clear_has_key();
+}
+inline const ::std::string& KeyValuePairSD::key() const {
+  return *key_;
+}
+inline void KeyValuePairSD::set_key(const ::std::string& value) {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::kEmptyString) {
+    key_ = new ::std::string;
+  }
+  key_->assign(value);
+}
+inline void KeyValuePairSD::set_key(const char* value) {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::kEmptyString) {
+    key_ = new ::std::string;
+  }
+  key_->assign(value);
+}
+inline void KeyValuePairSD::set_key(const char* value, size_t size) {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::kEmptyString) {
+    key_ = new ::std::string;
+  }
+  key_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* KeyValuePairSD::mutable_key() {
+  set_has_key();
+  if (key_ == &::google::protobuf::internal::kEmptyString) {
+    key_ = new ::std::string;
+  }
+  return key_;
+}
+inline ::std::string* KeyValuePairSD::release_key() {
+  clear_has_key();
+  if (key_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = key_;
+    key_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+
+// optional .EECloud.DbObjValue Value = 2;
+inline bool KeyValuePairSD::has_value() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void KeyValuePairSD::set_has_value() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void KeyValuePairSD::clear_has_value() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void KeyValuePairSD::clear_value() {
+  if (value_ != NULL) value_->::EECloud::DbObjValue::Clear();
+  clear_has_value();
+}
+inline const ::EECloud::DbObjValue& KeyValuePairSD::value() const {
+  return value_ != NULL ? *value_ : *default_instance_->value_;
+}
+inline ::EECloud::DbObjValue* KeyValuePairSD::mutable_value() {
+  set_has_value();
+  if (value_ == NULL) value_ = new ::EECloud::DbObjValue;
+  return value_;
+}
+inline ::EECloud::DbObjValue* KeyValuePairSD::release_value() {
+  clear_has_value();
+  ::EECloud::DbObjValue* temp = value_;
+  value_ = NULL;
+  return temp;
 }
 
 

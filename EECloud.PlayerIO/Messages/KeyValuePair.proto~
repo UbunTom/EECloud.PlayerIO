@@ -1,6 +1,13 @@
-package EECloud.PlayerIO.Messages;
+import "DbObjectValue.proto";
+
+package EECloud;
 
 message KeyValuePair {
 	optional string Key = 1;
 	optional string Value = 2;
+}
+
+message KeyValuePairSD {
+	optional string Key = 1;
+	optional DbObjValue Value = 2;
 }
