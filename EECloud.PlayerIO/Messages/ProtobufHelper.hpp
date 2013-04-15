@@ -5,8 +5,14 @@
 #ifndef PROTOBUFHELPER_H
 #define PROTOBUFHELPER_H
 
-#include "";
-
+#include "ConnectArgs.pb.h";
+#include "ConnectOutput.pb.h";
+#include "CreateJoinRoomArgs.pb.h";
+#include "CreateJoinRoomOutput.pb.h";
+#include "JoinRoomArgs.pb.h";
+#include "JoinRoomOutput.pb.h";
+#include "ListRoomsArgs.pb.h";
+#include "ListRoomsOutput.pb.h";
 
 
 
