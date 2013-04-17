@@ -56,7 +56,7 @@ namespace EECloud.PlayerIO
 		{
 			/*lock (_headers) Is this using threads?
 			{*/
-			for (iter = _headers.begin(); iter != _headers.end(); ++iter)
+			for (auto iter = _headers.begin(); iter != _headers.end(); ++iter)
 			{	
 				request.header_list = curl_slist_append(request.headerlist, iter->first + ": " + iter->second);  
 			}
