@@ -20,8 +20,6 @@ namespace EECloud
 
 	size_t write_data(void* ptr, size_t size, size_t nmemb, void* stream);
 	
-	int readByte(stringstream stream);
-
 	class HttpChannel
 	{
 		private: const string EndpointUri;
