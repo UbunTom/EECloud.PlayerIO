@@ -1,5 +1,6 @@
 #include <curl/curl.h>
 #include <string>
+#include <sstream>
 #include <map>
 using namespace std;
 
@@ -18,6 +19,8 @@ namespace EECloud
 	}
 
 	size_t write_data(void* ptr, size_t size, size_t nmemb, void* stream);
+	
+	int readByte(stringstream stream);
 
 	class HttpChannel
 	{
@@ -58,17 +61,15 @@ namespace EECloud
 				if (!r.ParseFromIstream(&response)) {
 					throw PlayerIOError(ErrorCode.GeneralError, "Failed to parse web response");
 				}
-				/*using (var responseStream = request.GetResponse().GetResponseStream())
+				
+				if (ReadHeader(response))
 				{
-					if (ReadHeader(responseStream))
-					{
-						r = Serializer.Deserialize<TResponse>(responseStream);
-					}
-					else
-					{
-						throw GetError<TError>(responseStream);
-					}
-				}*/
+					r->ParseFromIStream(response)
+				}
+				else
+				{
+					throw GetError<TError>(responseStream);
+				}
 			}
 			catch (PlayerIOError err)
 			{
