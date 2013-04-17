@@ -1,4 +1,7 @@
-﻿namespace EECloud.PlayerIO
+﻿#ifndef ERRORCODE_H
+#define ERRORCODE_H
+
+namespace EECloud
 {
     /// <summary>
     /// The code of the error that happened.
@@ -245,5 +248,7 @@
         /// Unable to locate the custom PartnerPay action with the given key.
         /// </summary>
         UnknownPartnerPayAction = 70
-    }
+    };
 }
+
+#endif

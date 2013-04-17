@@ -51,7 +51,7 @@ namespace EECloud
 	}
 	
 	
-	Vector<RoomInfo> ListRooms(string roomType, map<string, string> searchCriteria = null, int resultLimit = 0, int resultOffset = 0, bool onlyDevRooms = false)
+	public Vector<RoomInfo> ListRooms(string roomType, map<string, string> searchCriteria = null, int resultLimit = 0, int resultOffset = 0, bool onlyDevRooms = false)
 	{
 		ListRoomsArgs* listRoomsArg = new ListRoomsArgs
 		
@@ -61,8 +61,6 @@ namespace EECloud
 		listRoomsArg->set_ResultOffset(resultOffset);
 		listRoomsArg->set_OnlyDevRooms(onlyDevRooms);
 		
-		ListRoomsOutput* listRoomsOutput = _channel.Request<ListRoomsArgs*, ListRoomsOutput*, PlayerIOError*>(30, listRoomsArg);
-		return listRoomsOutput.RoomInfo;
+		var listRoomsOutput = _channel.Request<ListRoomsArgs, ListRoomsOutput, PlayerIOError>(30, listRoomsArg);
+		return listRoomsOutput.RoomInfo ?? new RoomInfo[0];
 	}
-	
-}

@@ -1,5 +1,3 @@
-#include "Connection.hpp"
-
 namespace EECloud
 {
         Connection::Connection(ServerEndpoint endpoint, string joinKey)

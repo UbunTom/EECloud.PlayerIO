@@ -1,6 +1,4 @@
 #include <string>
-#include "Helpers/HttpChannel.hpp"
-#include "Messages/ProtobufHelper.hpp"
 using namespace std;
 
 #ifndef BIGDB_H
@@ -17,7 +15,7 @@ namespace EECloud
         BigDB(HttpChannel* channel);//Constructor
 
         public: DatabaseObject* LoadMyPlayerObject();
-    };
-}
+    }
+};
 
 #endif

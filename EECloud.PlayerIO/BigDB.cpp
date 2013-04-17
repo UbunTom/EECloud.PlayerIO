@@ -4,7 +4,7 @@ namespace EECloud
 {
 	BigDB::BigDB(HttpChannel* channel)
 	{
-		PlayerObjectsTableName = "PlayerObjects";
+		string PlayerObjectsTableName = "PlayerObjects";
 		_channel = channel;
 	}
 	

@@ -1,0 +1,16 @@
+package EECloud;
+
+message RegistrationError
+{
+	optional ErrorCodeReg ErrorCode = 1;
+
+        optional string Message = 2;
+
+        optional string UsernameError = 3;
+
+        optional string PasswordError = 4;
+
+        optional string EmailError = 5;
+
+        optional string CaptchaError = 6;
+}

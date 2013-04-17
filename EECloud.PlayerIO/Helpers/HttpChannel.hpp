@@ -2,6 +2,13 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include <typeinfo>
+#include <iostream>
+#include <cstdlib>
+#include "../Messages/ProtobufHelper.hpp"
+#include "../Error/ErrorCode.hpp"
+#include "../Error/PlayerIOError.hpp"
+#include "../Error/PlayerIORegistrationError.hpp"
 using namespace std;
 
 namespace EECloud
@@ -14,9 +21,9 @@ namespace EECloud
 		public: CURLRequest();
 		public: ~CURLRequest();
 
-		public: CURL* handle(){return handle;}
+		public: CURL* get_handle(){return handle;}
 
-	}
+	};
 
 	size_t write_data(void* ptr, size_t size, size_t nmemb, void* stream);
 	
@@ -37,36 +44,36 @@ namespace EECloud
 			args->SerializeToOstream(&protobufStream);
 			string protobufString = protobufStream.str();
 			curl_easy_setopt(request.handle(), CURLOPT_POSTFIELDS, protobufString);
-       			curl_easy_setopt(request.handle(), CURLOPT_POSTFIELDSIZE, protobufString.length());
-       			
-       			std::stringstream response;//Prepare to recieve data
-       			std::stringstream headers;
-       			curl_easy_setopt(request.handle(), CURLOPT_WRITEFUNCTION, write_data);
-    			curl_easy_setopt(request.handle(), CURLOPT_WRITEDATA, &response);
-    			curl_easy_setopt(curl, CURLOPT_WRITEHEADER, &headers);
+			curl_easy_setopt(request.handle(), CURLOPT_POSTFIELDSIZE, protobufString.length());
+			
+			std::stringstream response;//Prepare to recieve data
+			std::stringstream headers;
+			curl_easy_setopt(request.get_handle(), CURLOPT_WRITEFUNCTION, write_data);
+			curl_easy_setopt(request.get_handle(), CURLOPT_WRITEDATA, &response);
+			curl_easy_setopt(request.get_handle(), CURLOPT_WRITEHEADER, &headers);
 
 			try
 			{
-				res = curl_easy_perform(curl);	
+				CURLcode res = curl_easy_perform(request.get_handle());	
 
 				if (res!=0)
 				{
 					stringstream errstream;
 					errstream << res;
-					throw PlayerIOError(ErrorCode.GeneralError, "A cURL error occured: " + errstream.str());
+					throw PlayerIOError(GeneralError, "A cURL error occured: " + errstream.str());
 				}
 
 				if (!r.ParseFromIstream(&response)) {
-					throw PlayerIOError(ErrorCode.GeneralError, "Failed to parse web response");
+					throw PlayerIOError(GeneralError, "Failed to parse web response");
 				}
 				
 				if (ReadHeader(response))
 				{
-					r->ParseFromIStream(response)
+					r->ParseFromIStream(response);
 				}
 				else
 				{
-					throw GetError<TError>(responseStream);
+					throw GetError<TError>(response);
 				}
 			}
 			catch (PlayerIOError err)
@@ -91,26 +98,37 @@ namespace EECloud
 		
 		private: CURLRequest GetRequest(int method);
 		
-		private: bool ReadHeader(Stream responseStream);
+		private: bool ReadHeader(stringstream responseStream);
 		
-		public: static TError GetError<TError>(Stream errorStream)// where TError : Exception
+		public: 
+		template<class TError>
+		static TError GetError(stringstream errorStream)// where TError : Exception
 		{
-			if (typeof(TError) != typeof(PlayerIOError))
+			if (typeid(TError) != typeid(PlayerIOError))
 			{
-				if (typeof(TError) != typeof(PlayerIORegistrationError))
+				if (typeid(TError) != typeid(PlayerIORegistrationError))
 				{
-				    return new ApplicationException("Unexpected error type: " + typeof(TError).FullName) as TError;
+					//ApplicationException regError;
+					string error = typeid(TError).name();
+					cout << "Unexpected error type: " + error << endl;
+					exit(1);
+					void* v;
+					return (TError)v;
 				}
-				var regError = Serializer.Deserialize<RegistrationError>(errorStream);
-				return new PlayerIORegistrationError(regError.ErrorCode, regError.Message, regError.UsernameError, regError.PasswordError, regError.EmailError, regError.CaptchaError) as TError;
+				RegistrationError regError;
+				regError.ParseFromIstream(&errorStream);
+				PlayerIORegistrationError* ret = new PlayerIORegistrationError((ErrorCode)regError.errorcode(), regError.message(), regError.usernameerror(), regError.passworderror(), regError.emailerror(), regError.captchaerror());
+				return (TError)ret;
 			}
-			var err = Serializer.Deserialize<Error>(errorStream);
-			return new PlayerIOError(err.ErrorCode, err.Message) as TError;
+			Error err;
+			err.ParseFromIstream(&errorStream);
+			PlayerIOError* ret = new PlayerIOError((ErrorCode)err.errorcode(), err.message());
+			return (TError)ret;
 		}
 		
 		public: void SetToken(string token);
 		
-	}
+	};
 }
 		
 		

@@ -1,0 +1,10 @@
+
+
+package EECloud;
+
+message Error
+{
+	optional int32 ErrorCodeError ErrorCode = 1;
+	
+	optional string Message = 2;
+}
