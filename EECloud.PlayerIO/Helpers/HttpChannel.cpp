@@ -1,11 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Text;
-using EECloud.PlayerIO.Messages;
-using ProtoBuf;
-
 #include "HttpChannel.hpp"
 
 namespace EECloud.PlayerIO
@@ -69,19 +61,21 @@ namespace EECloud.PlayerIO
 		return request;
         }
 
-	bool HttpChannel::ReadHeader(Stream responseStream)
+	bool HttpChannel::ReadHeader(stream responseStream)
 	{
-		if (responseStream.ReadByte() == 1)
+		char c,c1;
+		responseStream.read(&c,1)
+		if (c == 1)
 		{
-			ushort num = (ushort)(responseStream.ReadByte() << 8 | responseStream.ReadByte());
+			responseStream.read(&c,1);
+			responseStream.read(&c1,1)
+			unsigned short num = (unsigned short)(c << 8 | c1);
 			char* numArray = new char[num];
-			responseStream.Read(numArray, 0, numArray.Length);
-			lock (_headers)
-			{
-				_headers["playertoken"] = Encoding.UTF8.GetString(numArray, 0, numArray.Length);
-			}
+			responseStream.Read(numArray, 0, num);
+			_headers["playertoken"] = Encoding.UTF8.GetString(numArray, 0, numArray.Length);
 		}
-		return responseStream.ReadByte() == 1;
+		responseStream.read(&c,1);
+		return c == 1;
 	}
 
 	void HttpChannel::SetToken(string token)
