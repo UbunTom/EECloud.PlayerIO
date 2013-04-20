@@ -1,0 +1,20 @@
+import "KeyValuePair.proto";
+
+package EECloud;
+
+message SimpleRegisterArgs
+{
+	optional string GameId = 1;
+
+	optional string Username = 2;
+
+	optional string Password = 3;
+
+	optional string Email = 4;
+
+	optional string CaptchaKey = 5;
+
+	optional string CaptchaValue = 6;
+
+	repeated KeyValuePair ExtraData = 7;
+}

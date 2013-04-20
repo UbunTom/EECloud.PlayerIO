@@ -14,9 +14,9 @@ namespace EECloud
 
         private: HttpChannel* _channel; //Readonly
 
-        BigDB(HttpChannel* channel);//Constructor
+        public: BigDB(HttpChannel* channel);//Constructor
 
-        public: DatabaseObject* LoadMyPlayerObject();
+        public: DatabaseObject LoadMyPlayerObject();
     };
 }
 

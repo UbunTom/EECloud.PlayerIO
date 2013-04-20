@@ -1,27 +1,37 @@
-using EECloud.PlayerIO.Messages;
 #include <time.h>
 #include <sstream>
-#include "PlayerIO.h"
+#include "PlayerIO.hpp"
 #include "Cryptography/HMAC_SHA1.h"
 
-namespace EECloud.PlayerIO
+namespace EECloud
 {
-	QuickConnect* PlayerIO::QuickConnect()
+	
+	HttpChannel* const PlayerIO::Channel = new HttpChannel();
+	vector<QuickConnect*> PlayerIO::_quickConnect;
+	
+	QuickConnect* PlayerIO::quickConnect()
 	{
-		if (_quickConnect.size==0)_quickconnect.push_back(new QuickConnect(Channel))	
+		if (_quickConnect.size()==0)_quickConnect.push_back(new QuickConnect(Channel));
 		return _quickConnect[0];
 	}
+	
+	PlayerIO::PlayerIO()
+	{}
 
 	Client* PlayerIO::Connect(string gameId, string connectionId, string userId, string auth)
 	{
 		ConnectArgs* connectArg = new ConnectArgs;
-		connectArg.GameId=gameId;
-		connectArg.ConnectionId=connectionId;
-		connectArg.userId=userId;
-		connectArg.Auth=auth;
+		connectArg->set_gameid(gameId);
+		connectArg->set_connectionid(connectionId);
+		connectArg->set_userid(userId);
+		if (auth!="")connectArg->set_auth(auth);
 
-		ConnectOutput connectOutput = Channel.Request<ConnectArgs, ConnectOutput, PlayerIOError>(10, connectArg);
-		return new Client(Channel, connectOutput.Token, connectOutput.UserId);
+		ConnectOutput* connectOutput = Channel->Request<ConnectArgs*, ConnectOutput*, PlayerIOError*>(10, connectArg);
+		string token,userid;
+		token=connectOutput->token();
+		userid=connectOutput->userid();
+		delete connectOutput;
+		return new Client(Channel, token, userid);
 	}
 	
 	string PlayerIO::CalcAuth(string userId, string sharedSecret)
@@ -32,12 +42,12 @@ namespace EECloud.PlayerIO
 
 		stringstream timeStream; //convert unixtimeint to a string
 		timeStream << unixtimeint;
-		string unixtime = timeStream.str();
+		string unixTime = timeStream.str();
     
 		string text = unixTime + ":" + userId;
 
 		CHMAC_SHA1 HMAC_SHA1;
-		HMAC_SHA1.HMAC_SHA1((BYTE*)text.str(), text.size(), (BYTE*)sharedSecret.str(), sharedSecret.size(), digest) ;
+		HMAC_SHA1.HMAC_SHA1((BYTE*)text.c_str(), text.size(), (BYTE*)sharedSecret.c_str(), sharedSecret.size(), digest) ;
 
 		stringstream outhex;
 		outhex << hex;

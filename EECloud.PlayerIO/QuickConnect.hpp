@@ -1,6 +1,11 @@
+#include <string>
+#include <map>
+#include "Client.hpp"
+using namespace std;
+
 namespace EECloud
 {
-	  class QuickConnect
+	class QuickConnect
     {
         private: HttpChannel* _channel;
 
@@ -15,7 +20,7 @@ namespace EECloud
         /// <param name="gameId">The ID of the game you wish to connect to. This value can be found in the admin panel.</param>
         /// <param name="usernameOrEmail">The username or e-mail address of the user you wish to authenticate.</param>
         /// <param name="password">The password of the user you wish to authenticate.</param>
-        public: Client SimpleConnect(string gameId, string usernameOrEmail, string password);
+        public: Client* SimpleConnect(string gameId, string usernameOrEmail, string password);
 
         /// <summary>
         /// Connects to a game based on Player.IO as a Facebook user.
@@ -82,7 +87,7 @@ namespace EECloud
         /// <param name="captchaValue">Only if captcha is required: The string the user entered in response to the captcha image.</param>
         /// <param name="extraData">Any extra data that you wish to store with the user, such as gender, birthdate, etc.</param>
         /// <returns>The Client of the newly registered user.</returns>
-        public: Client SimpleRegister(string gameId, string username, string password, string email = null, string captchaKey = null, string captchaValue = null, Dictionary<string, string> extraData = null);
+        public: Client* SimpleRegister(string gameId, string username, string password, string email, string captchaKey, string captchaValue, map<string, string> extraData);
 
         /// <summary>
         /// Initiates the password recovery process for a user who has supplied an e-mail address during registration.
@@ -91,5 +96,5 @@ namespace EECloud
         /// <param name="usernameOrEmail">The username or e-mail address of the user who wishes to recover his/her password.</param>
         public: void SimpleRecoverPassword(string gameId, string usernameOrEmail);
         
-    }
+    };
 }

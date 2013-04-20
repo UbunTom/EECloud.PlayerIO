@@ -8,10 +8,12 @@ namespace EECloud
 		_channel = channel;
 	}
 	
-	DatabaseObject* BigDB::LoadMyPlayerObject()
+	DatabaseObject BigDB::LoadMyPlayerObject()
 	{
-		LoadMyPlayerObjectOutput loadMyPlayerObjectOutput = _channel.Request<NoArgsOrOutput*, LoadMyPlayerObjectOutput*, PlayerIOError*>(103, new NoArgsOrOutput());
-		loadMyPlayerObjectOutput.PlayerObject.Table = PlayerObjectsTableName;
-		return loadMyPlayerObjectOutput.PlayerObject;
+		LoadMyPlayerObjectOutput* loadMyPlayerObjectOutput = _channel->Request<NoArgsOrOutput*, LoadMyPlayerObjectOutput*, PlayerIOError*>(103, new NoArgsOrOutput());
+		DatabaseObject output = loadMyPlayerObjectOutput->playerobject();
+		output.set_table(PlayerObjectsTableName);
+		delete loadMyPlayerObjectOutput;
+		return output;
 	}
 }

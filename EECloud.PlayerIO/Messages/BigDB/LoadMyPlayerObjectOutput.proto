@@ -1,6 +1,6 @@
 import "DatabaseObject.proto";
 
-package EECloud.PlayerIO.Messages;
+package EECloud;
 
 message LoadMyPlayerObjectOutput {
   optional DatabaseObject PlayerObject = 1;

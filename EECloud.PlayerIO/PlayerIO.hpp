@@ -1,23 +1,25 @@
-using EECloud.PlayerIO.Messages;
 #include <vector>
 #include <string>
 #include "Helpers/HttpChannel.hpp"
+#include "QuickConnect.hpp"
 
 
-namespace EECloud.PlayerIO
+namespace EECloud
 {
 	/// <summary>
 	/// Entry class for the initial connection to Player.IO.
 	/// </summary>
 	class PlayerIO
 	{
-		private: const static HttpChannel* Channel = new HttpChannel(); //readonly
+		public: static HttpChannel* const Channel; //readonly
+		
+		public: PlayerIO();
 		
 		//private: static Lazy<QuickConnect> _quickConnect = new Lazy<QuickConnect>(() => new QuickConnect(Channel)); //readonly
-		private: const static vector<QuickConnect*> _quickConnect;
+		private: static vector<QuickConnect*> _quickConnect;
 		
 		
-		public: static QuickConnect* QuickConnect();
+		public: static QuickConnect* quickConnect();
 		
 		/// <summary>
 		/// Connects to a game based on Player.IO as the given user.
@@ -37,5 +39,5 @@ namespace EECloud.PlayerIO
 		/// <param name="sharedSecret">The shared secret to use when generating the hash. This must be the same value as the one given to a connection in the admin panel.</param>
 		public: static string CalcAuth(string userId, string sharedSecret);
 
-	}
+	};
 }

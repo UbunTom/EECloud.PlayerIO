@@ -1,3 +1,6 @@
+#ifndef HTTPCHANNEL_H
+#define HTTPCHANNEL_H
+
 #include <curl/curl.h>
 #include <string>
 #include <sstream>
@@ -33,18 +36,22 @@ namespace EECloud
 		private: map<string, string> _headers;
 		public: HttpChannel();
 
+		private: CURLRequest GetRequest(int method);
+		
+		private: bool ReadHeader(stringstream &responseStream);
+
 		public:
 		template<class TRequest, class TResponse, class TError>
 		TResponse Request(int method, TRequest args)// where TError : Exception
-        	{
-			TResponse r = TResponse();//default(TResponse);
+        {
+			TResponse r;// = TResponse();//default(TResponse);
 			CURLRequest request = GetRequest(method);
 
 			stringstream protobufStream;//Prepare data to send
 			args->SerializeToOstream(&protobufStream);
 			string protobufString = protobufStream.str();
-			curl_easy_setopt(request.handle(), CURLOPT_POSTFIELDS, protobufString);
-			curl_easy_setopt(request.handle(), CURLOPT_POSTFIELDSIZE, protobufString.length());
+			curl_easy_setopt(request.get_handle(), CURLOPT_POSTFIELDS, protobufString.c_str());
+			curl_easy_setopt(request.get_handle(), CURLOPT_POSTFIELDSIZE, protobufString.length());
 			
 			std::stringstream response;//Prepare to recieve data
 			std::stringstream headers;
@@ -63,13 +70,13 @@ namespace EECloud
 					throw PlayerIOError(GeneralError, "A cURL error occured: " + errstream.str());
 				}
 
-				if (!r.ParseFromIstream(&response)) {
+				/*if (!r->ParseFromIstream(&response)) {
 					throw PlayerIOError(GeneralError, "Failed to parse web response");
-				}
+				}*/
 				
 				if (ReadHeader(response))
 				{
-					r->ParseFromIStream(response);
+					r->ParseFromIstream(&response);
 				}
 				else
 				{
@@ -96,13 +103,11 @@ namespace EECloud
 			return r;
 		}
 		
-		private: CURLRequest GetRequest(int method);
 		
-		private: bool ReadHeader(stringstream responseStream);
 		
 		public: 
 		template<class TError>
-		static TError GetError(stringstream errorStream)// where TError : Exception
+		static TError GetError(stringstream &errorStream)// where TError : Exception
 		{
 			if (typeid(TError) != typeid(PlayerIOError))
 			{
@@ -131,4 +136,4 @@ namespace EECloud
 	};
 }
 		
-		
+#endif

@@ -17,9 +17,9 @@ namespace EECloud {
 
 namespace {
 
-const ::google::protobuf::Descriptor* SimpleConnectArgs_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* SimpleRecoverPasswordArgs_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  SimpleConnectArgs_reflection_ = NULL;
+  SimpleRecoverPasswordArgs_reflection_ = NULL;
 
 }  // namespace
 
@@ -30,23 +30,22 @@ void protobuf_AssignDesc_SimpleRecoverPasswordArgs_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "SimpleRecoverPasswordArgs.proto");
   GOOGLE_CHECK(file != NULL);
-  SimpleConnectArgs_descriptor_ = file->message_type(0);
-  static const int SimpleConnectArgs_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleConnectArgs, gameid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleConnectArgs, usernameoremail_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleConnectArgs, password_),
+  SimpleRecoverPasswordArgs_descriptor_ = file->message_type(0);
+  static const int SimpleRecoverPasswordArgs_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleRecoverPasswordArgs, gameid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleRecoverPasswordArgs, usernameoremail_),
   };
-  SimpleConnectArgs_reflection_ =
+  SimpleRecoverPasswordArgs_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      SimpleConnectArgs_descriptor_,
-      SimpleConnectArgs::default_instance_,
-      SimpleConnectArgs_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleConnectArgs, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleConnectArgs, _unknown_fields_),
+      SimpleRecoverPasswordArgs_descriptor_,
+      SimpleRecoverPasswordArgs::default_instance_,
+      SimpleRecoverPasswordArgs_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleRecoverPasswordArgs, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleRecoverPasswordArgs, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(SimpleConnectArgs));
+      sizeof(SimpleRecoverPasswordArgs));
 }
 
 namespace {
@@ -60,14 +59,14 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    SimpleConnectArgs_descriptor_, &SimpleConnectArgs::default_instance());
+    SimpleRecoverPasswordArgs_descriptor_, &SimpleRecoverPasswordArgs::default_instance());
 }
 
 }  // namespace
 
 void protobuf_ShutdownFile_SimpleRecoverPasswordArgs_2eproto() {
-  delete SimpleConnectArgs::default_instance_;
-  delete SimpleConnectArgs_reflection_;
+  delete SimpleRecoverPasswordArgs::default_instance_;
+  delete SimpleRecoverPasswordArgs_reflection_;
 }
 
 void protobuf_AddDesc_SimpleRecoverPasswordArgs_2eproto() {
@@ -78,13 +77,12 @@ void protobuf_AddDesc_SimpleRecoverPasswordArgs_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\037SimpleRecoverPasswordArgs.proto\022\007EEClo"
-    "ud\"N\n\021SimpleConnectArgs\022\016\n\006GameId\030\001 \001(\t\022"
-    "\027\n\017UsernameOrEmail\030\002 \001(\t\022\020\n\010Password\030\003 \001"
-    "(\t", 122);
+    "ud\"D\n\031SimpleRecoverPasswordArgs\022\016\n\006GameI"
+    "d\030\001 \001(\t\022\027\n\017UsernameOrEmail\030\002 \001(\t", 112);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "SimpleRecoverPasswordArgs.proto", &protobuf_RegisterTypes);
-  SimpleConnectArgs::default_instance_ = new SimpleConnectArgs();
-  SimpleConnectArgs::default_instance_->InitAsDefaultInstance();
+  SimpleRecoverPasswordArgs::default_instance_ = new SimpleRecoverPasswordArgs();
+  SimpleRecoverPasswordArgs::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_SimpleRecoverPasswordArgs_2eproto);
 }
 
@@ -99,72 +97,67 @@ struct StaticDescriptorInitializer_SimpleRecoverPasswordArgs_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int SimpleConnectArgs::kGameIdFieldNumber;
-const int SimpleConnectArgs::kUsernameOrEmailFieldNumber;
-const int SimpleConnectArgs::kPasswordFieldNumber;
+const int SimpleRecoverPasswordArgs::kGameIdFieldNumber;
+const int SimpleRecoverPasswordArgs::kUsernameOrEmailFieldNumber;
 #endif  // !_MSC_VER
 
-SimpleConnectArgs::SimpleConnectArgs()
+SimpleRecoverPasswordArgs::SimpleRecoverPasswordArgs()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void SimpleConnectArgs::InitAsDefaultInstance() {
+void SimpleRecoverPasswordArgs::InitAsDefaultInstance() {
 }
 
-SimpleConnectArgs::SimpleConnectArgs(const SimpleConnectArgs& from)
+SimpleRecoverPasswordArgs::SimpleRecoverPasswordArgs(const SimpleRecoverPasswordArgs& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void SimpleConnectArgs::SharedCtor() {
+void SimpleRecoverPasswordArgs::SharedCtor() {
   _cached_size_ = 0;
   gameid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   usernameoremail_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-SimpleConnectArgs::~SimpleConnectArgs() {
+SimpleRecoverPasswordArgs::~SimpleRecoverPasswordArgs() {
   SharedDtor();
 }
 
-void SimpleConnectArgs::SharedDtor() {
+void SimpleRecoverPasswordArgs::SharedDtor() {
   if (gameid_ != &::google::protobuf::internal::kEmptyString) {
     delete gameid_;
   }
   if (usernameoremail_ != &::google::protobuf::internal::kEmptyString) {
     delete usernameoremail_;
   }
-  if (password_ != &::google::protobuf::internal::kEmptyString) {
-    delete password_;
-  }
   if (this != default_instance_) {
   }
 }
 
-void SimpleConnectArgs::SetCachedSize(int size) const {
+void SimpleRecoverPasswordArgs::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* SimpleConnectArgs::descriptor() {
+const ::google::protobuf::Descriptor* SimpleRecoverPasswordArgs::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return SimpleConnectArgs_descriptor_;
+  return SimpleRecoverPasswordArgs_descriptor_;
 }
 
-const SimpleConnectArgs& SimpleConnectArgs::default_instance() {
+const SimpleRecoverPasswordArgs& SimpleRecoverPasswordArgs::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_SimpleRecoverPasswordArgs_2eproto();  return *default_instance_;
 }
 
-SimpleConnectArgs* SimpleConnectArgs::default_instance_ = NULL;
+SimpleRecoverPasswordArgs* SimpleRecoverPasswordArgs::default_instance_ = NULL;
 
-SimpleConnectArgs* SimpleConnectArgs::New() const {
-  return new SimpleConnectArgs;
+SimpleRecoverPasswordArgs* SimpleRecoverPasswordArgs::New() const {
+  return new SimpleRecoverPasswordArgs;
 }
 
-void SimpleConnectArgs::Clear() {
+void SimpleRecoverPasswordArgs::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (has_gameid()) {
       if (gameid_ != &::google::protobuf::internal::kEmptyString) {
@@ -176,17 +169,12 @@ void SimpleConnectArgs::Clear() {
         usernameoremail_->clear();
       }
     }
-    if (has_password()) {
-      if (password_ != &::google::protobuf::internal::kEmptyString) {
-        password_->clear();
-      }
-    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool SimpleConnectArgs::MergePartialFromCodedStream(
+bool SimpleRecoverPasswordArgs::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -221,23 +209,6 @@ bool SimpleConnectArgs::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(26)) goto parse_Password;
-        break;
-      }
-      
-      // optional string Password = 3;
-      case 3: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_Password:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_password()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->password().data(), this->password().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
-        } else {
-          goto handle_uninterpreted;
-        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -258,7 +229,7 @@ bool SimpleConnectArgs::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void SimpleConnectArgs::SerializeWithCachedSizes(
+void SimpleRecoverPasswordArgs::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // optional string GameId = 1;
   if (has_gameid()) {
@@ -278,22 +249,13 @@ void SimpleConnectArgs::SerializeWithCachedSizes(
       2, this->usernameoremail(), output);
   }
   
-  // optional string Password = 3;
-  if (has_password()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->password().data(), this->password().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      3, this->password(), output);
-  }
-  
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
 }
 
-::google::protobuf::uint8* SimpleConnectArgs::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* SimpleRecoverPasswordArgs::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // optional string GameId = 1;
   if (has_gameid()) {
@@ -315,16 +277,6 @@ void SimpleConnectArgs::SerializeWithCachedSizes(
         2, this->usernameoremail(), target);
   }
   
-  // optional string Password = 3;
-  if (has_password()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->password().data(), this->password().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->password(), target);
-  }
-  
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -332,7 +284,7 @@ void SimpleConnectArgs::SerializeWithCachedSizes(
   return target;
 }
 
-int SimpleConnectArgs::ByteSize() const {
+int SimpleRecoverPasswordArgs::ByteSize() const {
   int total_size = 0;
   
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -350,13 +302,6 @@ int SimpleConnectArgs::ByteSize() const {
           this->usernameoremail());
     }
     
-    // optional string Password = 3;
-    if (has_password()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->password());
-    }
-    
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -369,10 +314,10 @@ int SimpleConnectArgs::ByteSize() const {
   return total_size;
 }
 
-void SimpleConnectArgs::MergeFrom(const ::google::protobuf::Message& from) {
+void SimpleRecoverPasswordArgs::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const SimpleConnectArgs* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const SimpleConnectArgs*>(
+  const SimpleRecoverPasswordArgs* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const SimpleRecoverPasswordArgs*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -381,7 +326,7 @@ void SimpleConnectArgs::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void SimpleConnectArgs::MergeFrom(const SimpleConnectArgs& from) {
+void SimpleRecoverPasswordArgs::MergeFrom(const SimpleRecoverPasswordArgs& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_gameid()) {
@@ -390,46 +335,42 @@ void SimpleConnectArgs::MergeFrom(const SimpleConnectArgs& from) {
     if (from.has_usernameoremail()) {
       set_usernameoremail(from.usernameoremail());
     }
-    if (from.has_password()) {
-      set_password(from.password());
-    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void SimpleConnectArgs::CopyFrom(const ::google::protobuf::Message& from) {
+void SimpleRecoverPasswordArgs::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void SimpleConnectArgs::CopyFrom(const SimpleConnectArgs& from) {
+void SimpleRecoverPasswordArgs::CopyFrom(const SimpleRecoverPasswordArgs& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool SimpleConnectArgs::IsInitialized() const {
+bool SimpleRecoverPasswordArgs::IsInitialized() const {
   
   return true;
 }
 
-void SimpleConnectArgs::Swap(SimpleConnectArgs* other) {
+void SimpleRecoverPasswordArgs::Swap(SimpleRecoverPasswordArgs* other) {
   if (other != this) {
     std::swap(gameid_, other->gameid_);
     std::swap(usernameoremail_, other->usernameoremail_);
-    std::swap(password_, other->password_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata SimpleConnectArgs::GetMetadata() const {
+::google::protobuf::Metadata SimpleRecoverPasswordArgs::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = SimpleConnectArgs_descriptor_;
-  metadata.reflection = SimpleConnectArgs_reflection_;
+  metadata.descriptor = SimpleRecoverPasswordArgs_descriptor_;
+  metadata.reflection = SimpleRecoverPasswordArgs_reflection_;
   return metadata;
 }
 

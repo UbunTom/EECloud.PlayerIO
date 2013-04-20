@@ -14,8 +14,6 @@
 // @@protoc_insertion_point(includes)
 
 namespace EECloud {
-namespace PlayerIO {
-namespace Messages {
 
 namespace {
 
@@ -78,10 +76,10 @@ void protobuf_AddDesc_LoadMyPlayerObjectOutput_2eproto() {
 
   ::EECloud::protobuf_AddDesc_DatabaseObject_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\036LoadMyPlayerObjectOutput.proto\022\031EEClou"
-    "d.PlayerIO.Messages\032\024DatabaseObject.prot"
-    "o\"I\n\030LoadMyPlayerObjectOutput\022-\n\014PlayerO"
-    "bject\030\001 \001(\0132\027.EECloud.DatabaseObject", 156);
+    "\n\036LoadMyPlayerObjectOutput.proto\022\007EEClou"
+    "d\032\024DatabaseObject.proto\"I\n\030LoadMyPlayerO"
+    "bjectOutput\022-\n\014PlayerObject\030\001 \001(\0132\027.EECl"
+    "oud.DatabaseObject", 138);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "LoadMyPlayerObjectOutput.proto", &protobuf_RegisterTypes);
   LoadMyPlayerObjectOutput::default_instance_ = new LoadMyPlayerObjectOutput();
@@ -311,8 +309,6 @@ void LoadMyPlayerObjectOutput::Swap(LoadMyPlayerObjectOutput* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace Messages
-}  // namespace PlayerIO
 }  // namespace EECloud
 
 // @@protoc_insertion_point(global_scope)

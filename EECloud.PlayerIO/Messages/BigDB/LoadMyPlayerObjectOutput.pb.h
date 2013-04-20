@@ -23,12 +23,10 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/generated_message_reflection.h>
-#include "DatabaseObject.pb.h"
+#include "../../Helpers/DatabaseObject.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace EECloud {
-namespace PlayerIO {
-namespace Messages {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_LoadMyPlayerObjectOutput_2eproto();
@@ -101,7 +99,7 @@ class LoadMyPlayerObjectOutput : public ::google::protobuf::Message {
   inline ::EECloud::DatabaseObject* mutable_playerobject();
   inline ::EECloud::DatabaseObject* release_playerobject();
   
-  // @@protoc_insertion_point(class_scope:EECloud.PlayerIO.Messages.LoadMyPlayerObjectOutput)
+  // @@protoc_insertion_point(class_scope:EECloud.LoadMyPlayerObjectOutput)
  private:
   inline void set_has_playerobject();
   inline void clear_has_playerobject();
@@ -159,8 +157,6 @@ inline ::EECloud::DatabaseObject* LoadMyPlayerObjectOutput::release_playerobject
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace Messages
-}  // namespace PlayerIO
 }  // namespace EECloud
 
 #ifndef SWIG

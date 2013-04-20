@@ -32,18 +32,18 @@ void  protobuf_AddDesc_SimpleRecoverPasswordArgs_2eproto();
 void protobuf_AssignDesc_SimpleRecoverPasswordArgs_2eproto();
 void protobuf_ShutdownFile_SimpleRecoverPasswordArgs_2eproto();
 
-class SimpleConnectArgs;
+class SimpleRecoverPasswordArgs;
 
 // ===================================================================
 
-class SimpleConnectArgs : public ::google::protobuf::Message {
+class SimpleRecoverPasswordArgs : public ::google::protobuf::Message {
  public:
-  SimpleConnectArgs();
-  virtual ~SimpleConnectArgs();
+  SimpleRecoverPasswordArgs();
+  virtual ~SimpleRecoverPasswordArgs();
   
-  SimpleConnectArgs(const SimpleConnectArgs& from);
+  SimpleRecoverPasswordArgs(const SimpleRecoverPasswordArgs& from);
   
-  inline SimpleConnectArgs& operator=(const SimpleConnectArgs& from) {
+  inline SimpleRecoverPasswordArgs& operator=(const SimpleRecoverPasswordArgs& from) {
     CopyFrom(from);
     return *this;
   }
@@ -57,17 +57,17 @@ class SimpleConnectArgs : public ::google::protobuf::Message {
   }
   
   static const ::google::protobuf::Descriptor* descriptor();
-  static const SimpleConnectArgs& default_instance();
+  static const SimpleRecoverPasswordArgs& default_instance();
   
-  void Swap(SimpleConnectArgs* other);
+  void Swap(SimpleRecoverPasswordArgs* other);
   
   // implements Message ----------------------------------------------
   
-  SimpleConnectArgs* New() const;
+  SimpleRecoverPasswordArgs* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const SimpleConnectArgs& from);
-  void MergeFrom(const SimpleConnectArgs& from);
+  void CopyFrom(const SimpleRecoverPasswordArgs& from);
+  void MergeFrom(const SimpleRecoverPasswordArgs& from);
   void Clear();
   bool IsInitialized() const;
   
@@ -112,97 +112,83 @@ class SimpleConnectArgs : public ::google::protobuf::Message {
   inline ::std::string* mutable_usernameoremail();
   inline ::std::string* release_usernameoremail();
   
-  // optional string Password = 3;
-  inline bool has_password() const;
-  inline void clear_password();
-  static const int kPasswordFieldNumber = 3;
-  inline const ::std::string& password() const;
-  inline void set_password(const ::std::string& value);
-  inline void set_password(const char* value);
-  inline void set_password(const char* value, size_t size);
-  inline ::std::string* mutable_password();
-  inline ::std::string* release_password();
-  
-  // @@protoc_insertion_point(class_scope:EECloud.SimpleConnectArgs)
+  // @@protoc_insertion_point(class_scope:EECloud.SimpleRecoverPasswordArgs)
  private:
   inline void set_has_gameid();
   inline void clear_has_gameid();
   inline void set_has_usernameoremail();
   inline void clear_has_usernameoremail();
-  inline void set_has_password();
-  inline void clear_has_password();
   
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
   
   ::std::string* gameid_;
   ::std::string* usernameoremail_;
-  ::std::string* password_;
   
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
   
   friend void  protobuf_AddDesc_SimpleRecoverPasswordArgs_2eproto();
   friend void protobuf_AssignDesc_SimpleRecoverPasswordArgs_2eproto();
   friend void protobuf_ShutdownFile_SimpleRecoverPasswordArgs_2eproto();
   
   void InitAsDefaultInstance();
-  static SimpleConnectArgs* default_instance_;
+  static SimpleRecoverPasswordArgs* default_instance_;
 };
 // ===================================================================
 
 
 // ===================================================================
 
-// SimpleConnectArgs
+// SimpleRecoverPasswordArgs
 
 // optional string GameId = 1;
-inline bool SimpleConnectArgs::has_gameid() const {
+inline bool SimpleRecoverPasswordArgs::has_gameid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void SimpleConnectArgs::set_has_gameid() {
+inline void SimpleRecoverPasswordArgs::set_has_gameid() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void SimpleConnectArgs::clear_has_gameid() {
+inline void SimpleRecoverPasswordArgs::clear_has_gameid() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void SimpleConnectArgs::clear_gameid() {
+inline void SimpleRecoverPasswordArgs::clear_gameid() {
   if (gameid_ != &::google::protobuf::internal::kEmptyString) {
     gameid_->clear();
   }
   clear_has_gameid();
 }
-inline const ::std::string& SimpleConnectArgs::gameid() const {
+inline const ::std::string& SimpleRecoverPasswordArgs::gameid() const {
   return *gameid_;
 }
-inline void SimpleConnectArgs::set_gameid(const ::std::string& value) {
+inline void SimpleRecoverPasswordArgs::set_gameid(const ::std::string& value) {
   set_has_gameid();
   if (gameid_ == &::google::protobuf::internal::kEmptyString) {
     gameid_ = new ::std::string;
   }
   gameid_->assign(value);
 }
-inline void SimpleConnectArgs::set_gameid(const char* value) {
+inline void SimpleRecoverPasswordArgs::set_gameid(const char* value) {
   set_has_gameid();
   if (gameid_ == &::google::protobuf::internal::kEmptyString) {
     gameid_ = new ::std::string;
   }
   gameid_->assign(value);
 }
-inline void SimpleConnectArgs::set_gameid(const char* value, size_t size) {
+inline void SimpleRecoverPasswordArgs::set_gameid(const char* value, size_t size) {
   set_has_gameid();
   if (gameid_ == &::google::protobuf::internal::kEmptyString) {
     gameid_ = new ::std::string;
   }
   gameid_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* SimpleConnectArgs::mutable_gameid() {
+inline ::std::string* SimpleRecoverPasswordArgs::mutable_gameid() {
   set_has_gameid();
   if (gameid_ == &::google::protobuf::internal::kEmptyString) {
     gameid_ = new ::std::string;
   }
   return gameid_;
 }
-inline ::std::string* SimpleConnectArgs::release_gameid() {
+inline ::std::string* SimpleRecoverPasswordArgs::release_gameid() {
   clear_has_gameid();
   if (gameid_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
@@ -214,117 +200,59 @@ inline ::std::string* SimpleConnectArgs::release_gameid() {
 }
 
 // optional string UsernameOrEmail = 2;
-inline bool SimpleConnectArgs::has_usernameoremail() const {
+inline bool SimpleRecoverPasswordArgs::has_usernameoremail() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void SimpleConnectArgs::set_has_usernameoremail() {
+inline void SimpleRecoverPasswordArgs::set_has_usernameoremail() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void SimpleConnectArgs::clear_has_usernameoremail() {
+inline void SimpleRecoverPasswordArgs::clear_has_usernameoremail() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void SimpleConnectArgs::clear_usernameoremail() {
+inline void SimpleRecoverPasswordArgs::clear_usernameoremail() {
   if (usernameoremail_ != &::google::protobuf::internal::kEmptyString) {
     usernameoremail_->clear();
   }
   clear_has_usernameoremail();
 }
-inline const ::std::string& SimpleConnectArgs::usernameoremail() const {
+inline const ::std::string& SimpleRecoverPasswordArgs::usernameoremail() const {
   return *usernameoremail_;
 }
-inline void SimpleConnectArgs::set_usernameoremail(const ::std::string& value) {
+inline void SimpleRecoverPasswordArgs::set_usernameoremail(const ::std::string& value) {
   set_has_usernameoremail();
   if (usernameoremail_ == &::google::protobuf::internal::kEmptyString) {
     usernameoremail_ = new ::std::string;
   }
   usernameoremail_->assign(value);
 }
-inline void SimpleConnectArgs::set_usernameoremail(const char* value) {
+inline void SimpleRecoverPasswordArgs::set_usernameoremail(const char* value) {
   set_has_usernameoremail();
   if (usernameoremail_ == &::google::protobuf::internal::kEmptyString) {
     usernameoremail_ = new ::std::string;
   }
   usernameoremail_->assign(value);
 }
-inline void SimpleConnectArgs::set_usernameoremail(const char* value, size_t size) {
+inline void SimpleRecoverPasswordArgs::set_usernameoremail(const char* value, size_t size) {
   set_has_usernameoremail();
   if (usernameoremail_ == &::google::protobuf::internal::kEmptyString) {
     usernameoremail_ = new ::std::string;
   }
   usernameoremail_->assign(reinterpret_cast<const char*>(value), size);
 }
-inline ::std::string* SimpleConnectArgs::mutable_usernameoremail() {
+inline ::std::string* SimpleRecoverPasswordArgs::mutable_usernameoremail() {
   set_has_usernameoremail();
   if (usernameoremail_ == &::google::protobuf::internal::kEmptyString) {
     usernameoremail_ = new ::std::string;
   }
   return usernameoremail_;
 }
-inline ::std::string* SimpleConnectArgs::release_usernameoremail() {
+inline ::std::string* SimpleRecoverPasswordArgs::release_usernameoremail() {
   clear_has_usernameoremail();
   if (usernameoremail_ == &::google::protobuf::internal::kEmptyString) {
     return NULL;
   } else {
     ::std::string* temp = usernameoremail_;
     usernameoremail_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-
-// optional string Password = 3;
-inline bool SimpleConnectArgs::has_password() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void SimpleConnectArgs::set_has_password() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void SimpleConnectArgs::clear_has_password() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void SimpleConnectArgs::clear_password() {
-  if (password_ != &::google::protobuf::internal::kEmptyString) {
-    password_->clear();
-  }
-  clear_has_password();
-}
-inline const ::std::string& SimpleConnectArgs::password() const {
-  return *password_;
-}
-inline void SimpleConnectArgs::set_password(const ::std::string& value) {
-  set_has_password();
-  if (password_ == &::google::protobuf::internal::kEmptyString) {
-    password_ = new ::std::string;
-  }
-  password_->assign(value);
-}
-inline void SimpleConnectArgs::set_password(const char* value) {
-  set_has_password();
-  if (password_ == &::google::protobuf::internal::kEmptyString) {
-    password_ = new ::std::string;
-  }
-  password_->assign(value);
-}
-inline void SimpleConnectArgs::set_password(const char* value, size_t size) {
-  set_has_password();
-  if (password_ == &::google::protobuf::internal::kEmptyString) {
-    password_ = new ::std::string;
-  }
-  password_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* SimpleConnectArgs::mutable_password() {
-  set_has_password();
-  if (password_ == &::google::protobuf::internal::kEmptyString) {
-    password_ = new ::std::string;
-  }
-  return password_;
-}
-inline ::std::string* SimpleConnectArgs::release_password() {
-  clear_has_password();
-  if (password_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = password_;
-    password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
     return temp;
   }
 }

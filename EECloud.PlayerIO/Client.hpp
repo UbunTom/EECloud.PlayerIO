@@ -5,12 +5,14 @@
 #include <map>
 #include "BigDB.hpp"
 #include "Helpers/HttpChannel.hpp"
-
-
 using namespace std;
+
+
 
 namespace EECloud
 {
+	class Connection;
+	
     /// <summary>
     /// Represents a client you can access the various Player.IO services with.
     /// </summary>
@@ -18,7 +20,7 @@ namespace EECloud
     {
         private: HttpChannel* _channel;
 
-        public: BigDB* BigDB;
+        public: BigDB* bigDB;
 
         /// <summary>
         /// If not null, rooms will be created on the development server at the address defined by the server endpoint, instead of using the live Player.IO servers.
@@ -47,14 +49,14 @@ namespace EECloud
         /// <param name="visible">If the room doesn't exists: Determines (upon creation) if the room should be visible when listing rooms with GetRooms.</param>
         /// <param name="roomData">If the room doesn't exists: The data to initialize the room with (upon creation).</param>
         /// <param name="joinData">Data to send to the room with additional information about the join.</param>
-        public: Connection* CreateJoinRoom(string roomId, string serverType, bool visible = true, map<string, string> roomData = null, map<string, string> joinData = null);
+        public: Connection* CreateJoinRoom(string roomId, string serverType, map<string, string> roomData, map<string, string> joinData, bool visible = true);
 
         /// <summary>
         /// Joins a running multiplayer room.
         /// </summary>
         /// <param name="roomId">The ID of the room you wish to join.</param>
         /// <param name="joinData">Data to send to the room with additional information about the join.</param>
-        public: Connection* JoinRoom(string roomId, map<string, string> joinData = null);
+        public: Connection* JoinRoom(string roomId, map<string, string> joinData);
 
         /// <summary>
         /// Lists the currently running multiplayer rooms.
@@ -64,9 +66,9 @@ namespace EECloud
         /// <param name="resultLimit">The maximum amount of rooms you want to receive. Use 0 for 'as many as possible'.</param>
         /// <param name="resultOffset">Defines the index to show results from.</param>
         /// <param name="onlyDevRooms">Set to 'true' to list rooms from the development room list, rather than from the game's global room list.</param>
-        public: Vector<RoomInfo> ListRooms(string roomType, map<string, string> searchCriteria = null, int resultLimit = 0, int resultOffset = 0, bool onlyDevRooms = false);
+        public: vector<RoomInfo> ListRooms(string roomType, map<string, string> searchCriteria, int resultLimit = 0, int resultOffset = 0, bool onlyDevRooms = false);
 
-    }
+    };
 }
 
 #endif

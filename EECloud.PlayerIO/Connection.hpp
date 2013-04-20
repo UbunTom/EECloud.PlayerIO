@@ -1,5 +1,12 @@
+#include <string>
+using namespace std;
+
+
+
 namespace EECloud
 {
+	class ServerEndpoint;
+	
     //Not sure if this events system is even working
     
     /// <summary>
@@ -16,7 +23,7 @@ namespace EECloud
     /// <summary>
     /// A connection to a running Player.IO multiplayer room.
     /// </summary>
-    public class Connection
+    class Connection
     {
         /// <summary>
         /// Determines if the connection is currently connected to a remote host or not.
@@ -32,9 +39,9 @@ namespace EECloud
         /// </summary>
         //public event DisconnectEventHandler OnDisconnect;
 
-        public Connection(ServerEndpoint endpoint, string joinKey);
+        public: Connection(ServerEndpoint* endpoint, string joinKey);
 
-        public void Disconnect();
+        public: void Disconnect();
 
-    }
+    };
 }
