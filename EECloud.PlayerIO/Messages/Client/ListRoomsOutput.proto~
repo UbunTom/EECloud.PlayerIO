@@ -1,8 +1,0 @@
-import "RoomInfo.proto"
-
-package EECloud;
-
-message ListRoomsOutput
-{
-    repeated RoomInfo RoomInfo = 1;
-}

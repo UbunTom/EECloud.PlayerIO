@@ -1,8 +1,0 @@
-package EECloud;
-
-message ServerEndpoint
-{
-	optional string Address = 1;
-	
-	optional int Port = 2;
-}
