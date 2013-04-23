@@ -10,7 +10,7 @@ namespace EECloud
 		simpleConnectArgs->set_usernameoremail(usernameOrEmail);
 		simpleConnectArgs->set_password(password);
 		
-		ConnectOutput* simpleConnectOutput = _channel->Request<SimpleConnectArgs*, ConnectOutput*, PlayerIOError*>(400,simpleConnectArgs);
+		ConnectOutput* simpleConnectOutput = _channel->Request<SimpleConnectArgs, ConnectOutput, PlayerIOError>(400,simpleConnectArgs);
 		delete simpleConnectArgs;
 		
 		return new Client(_channel, simpleConnectOutput->token(), simpleConnectOutput->userid());
@@ -28,7 +28,7 @@ namespace EECloud
 		simpleRegisterArgs->set_captchavalue(captchaValue);
 		vector_ExtraData<SimpleRegisterArgs*>(simpleRegisterArgs,Converter::Convert(extraData));
 		
-		ConnectOutput* simpleRegisterOutput = _channel->Request<SimpleRegisterArgs*, ConnectOutput*, PlayerIORegistrationError*>(403,simpleRegisterArgs);
+		ConnectOutput* simpleRegisterOutput = _channel->Request<SimpleRegisterArgs, ConnectOutput, PlayerIORegistrationError>(403,simpleRegisterArgs);
 		delete simpleRegisterArgs;
 		
 		return new Client(_channel, simpleRegisterOutput->token(), simpleRegisterOutput->userid());
@@ -40,7 +40,7 @@ namespace EECloud
 		simpleRecoverPasswordArgs->set_gameid(gameId);
 		simpleRecoverPasswordArgs->set_usernameoremail(usernameOrEmail);
 
-		_channel->Request<SimpleRecoverPasswordArgs*, NoArgsOrOutput*, PlayerIOError*>(406,simpleRecoverPasswordArgs);
+		_channel->Request<SimpleRecoverPasswordArgs, NoArgsOrOutput, PlayerIOError>(406,simpleRecoverPasswordArgs);
 		delete simpleRecoverPasswordArgs;
 	}
 }

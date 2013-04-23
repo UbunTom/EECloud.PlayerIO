@@ -26,7 +26,7 @@ namespace EECloud
 		connectArg->set_userid(userId);
 		if (auth!="")connectArg->set_auth(auth);
 
-		ConnectOutput* connectOutput = Channel->Request<ConnectArgs*, ConnectOutput*, PlayerIOError*>(10, connectArg);
+		ConnectOutput* connectOutput = Channel->Request<ConnectArgs, ConnectOutput, PlayerIOError>(10, connectArg);
 		string token,userid;
 		token=connectOutput->token();
 		userid=connectOutput->userid();

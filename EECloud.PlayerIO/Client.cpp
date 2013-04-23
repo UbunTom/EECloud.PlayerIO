@@ -25,7 +25,7 @@ namespace EECloud
 		vector_JoinData<CreateJoinRoomArgs*>(createJoinRoomArg,Converter::Convert(joinData));
 		createJoinRoomArg->set_isdevroom(DevelopmentServer != NULL);
 
-		CreateJoinRoomOutput* createJoinRoomOutput = _channel->Request<CreateJoinRoomArgs*, CreateJoinRoomOutput*, PlayerIOError*>(27, createJoinRoomArg);
+		CreateJoinRoomOutput* createJoinRoomOutput = _channel->Request<CreateJoinRoomArgs, CreateJoinRoomOutput, PlayerIOError>(27, createJoinRoomArg);
 		delete createJoinRoomArg;
 		
 		ServerEndpoint* serverEndpoint;
@@ -43,7 +43,7 @@ namespace EECloud
 		vector_JoinData<JoinRoomArgs*>(joinRoomArg,Converter::Convert(joinData));
 		joinRoomArg->set_isdevroom(DevelopmentServer != NULL);
 		
-		JoinRoomOutput* joinRoomOutput = _channel->Request<JoinRoomArgs*, JoinRoomOutput*, PlayerIOError*>(24, joinRoomArg);
+		JoinRoomOutput* joinRoomOutput = _channel->Request<JoinRoomArgs, JoinRoomOutput, PlayerIOError>(24, joinRoomArg);
 		delete joinRoomArg;
 		
 		ServerEndpoint* serverEndpoint;
@@ -64,7 +64,7 @@ namespace EECloud
 		listRoomsArg->set_resultoffset(resultOffset);
 		listRoomsArg->set_onlydevrooms(onlyDevRooms);
 		
-		ListRoomsOutput* listRoomsOutput = _channel->Request<ListRoomsArgs*, ListRoomsOutput*, PlayerIOError*>(30, listRoomsArg);
+		ListRoomsOutput* listRoomsOutput = _channel->Request<ListRoomsArgs, ListRoomsOutput, PlayerIOError>(30, listRoomsArg);
 		
 		vector<RoomInfo> roomvector;
 		save_RoomInfo<ListRoomsOutput*>(listRoomsOutput,roomvector);

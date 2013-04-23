@@ -16,9 +16,9 @@ namespace EECloud
 		save_Properties<DatabaseObject*>(&test,kvp);
 		map<string, DbObjValue> kvpMap= Converter::Convert(kvp);
 		
-		/*for (map<string, string>::iterator iter = kvpMap.begin(); iter != kvpMap.end(); ++iter) {
-			cout << iter->first << " = " << iter->second << endl;
-        }*/
+		for (map<string, DbObjValue>::iterator iter = kvpMap.begin(); iter != kvpMap.end(); ++iter) {
+			cout << iter->first << " = " << iter->second.valuestring() << endl;
+        }
 
 		cout << " Done!" << endl;
 		cout << "Token: " + client->Token() << endl;
