@@ -6,6 +6,8 @@ This is the C++ port
 Compiling
 ---------
 
-Tested with g++ 4.7.2
-Link with curl and protobuf
-Use -std=c++11 flag
+Tested with g++ 4.7.2.
+
+Link with curl and protobuf.
+
+Use -std=c++11 flag.
