@@ -14,7 +14,7 @@ Use -std=c++11 flag.
 
 Problems
 --------
-The uncompiled .proto files are not easily compiled, but this isn't a problem unless you are editing these files. Anyone with better ptotobuf knowledge, feel free to clean them up.
+The uncompiled .proto files are not easily compiled, but this isn't a problem unless you are editing these files. Anyone with better protobuf knowledge, feel free to clean them up.
 
 
 
