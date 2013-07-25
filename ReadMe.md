@@ -12,6 +12,12 @@ Link with curl and protobuf.
 
 Use -std=c++11 flag.
 
+Problems
+--------
+The uncompiled .proto files are not easily compiled, but this isn't a problem unless you are editing these files. Anyone with better ptotobuf knowledge, feel free to clean them up.
+
+
+
 Further Reading
 ---------------
 [EECloud.PlayerIO (C#)](http://github.com/Yonom/EECloud.PlayerIO)
